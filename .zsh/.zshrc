@@ -1,4 +1,4 @@
-export ZSHHOME="$ZSHHOME:$HOME/dotfiles/.zsh"
+ZSHHOME="$HOME/dotfiles/.zsh"
 
 if [ -d $ZSHHOME -a -r $ZSHHOME -a \
      -x $ZSHHOME ]; then

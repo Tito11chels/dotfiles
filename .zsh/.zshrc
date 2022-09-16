@@ -7,3 +7,5 @@ if [ -d $ZSHHOME -a -r $ZSHHOME -a \
             [ \( -f $i -o -h $i \) -a -r $i ] && . $i
     done
 fi
+
+HISTFILE=$HOME/dotfiles/.zsh/.zsh_history

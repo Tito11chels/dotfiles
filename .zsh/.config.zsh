@@ -14,13 +14,6 @@ setopt pushd_ignore_dups
 setopt hist_ignore_space
 setopt auto_param_keys
 disable r
-## 補完候補を一覧表示したとき、Tabや矢印で選択できるようにする
-zstyle ':completion:*:setopt:*' menu true select
-zstyle ':completion:*:default' list-colors
-## 補完で小文字でも大文字にマッチさせる
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' matcher-list 'm:to=2'
-zstyle ':completion:*' completer _complete _correct
 
 # nodenv_init
 eval "$(nodenv init -)"

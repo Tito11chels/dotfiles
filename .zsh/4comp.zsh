@@ -20,9 +20,9 @@ colors
 ## ファイル補完候補に色を付ける
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 ## cheat-sheet
-cheat-sheet () { zle -M "`cat ~/zsh/cheat-sheet.conf`" }
+cheat-sheet () { zle -M "`cat $ZSH_DIR/cheat-sheet.conf`" }
 zle -N cheat-sheet
 bindkey "^[^h" cheat-sheet
-git-cheat () { zle -M "`cat ~/zsh/git-cheat.conf`" }
+git-cheat () { zle -M "`cat $ZSH_DIR/git-cheat.conf`" }
 zle -N git-cheat
 bindkey "^[^g" git-cheat

@@ -11,7 +11,6 @@ fi
 
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
     autoload -Uz compinit
     compinit -d $HOME/dotfiles/.zsh/.zcompdump
 fi

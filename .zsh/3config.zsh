@@ -22,12 +22,3 @@ eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 # sheldon autoload
 eval "$(sheldon source)"
-
-# zsh-packages-setup
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source $HOME/.sheldon/repos/github.com/romkatv/powerlevel10k/powerlevel10k.zsh-theme
-# zsh-highlighting
-source $HOME/.sheldon/repos/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# zsh-autosuggestions
-source $HOME/.sheldon/repos/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh

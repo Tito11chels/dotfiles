@@ -15,18 +15,20 @@ setopt hist_ignore_space
 setopt auto_param_keys
 disable r
 
-# nodenv_init
+# nodenv autoload
 eval "$(nodenv init -)"
-# rbenv init
+# rbenv autoload
 eval "$(rbenv init -)"
-# pyenv init
+# pyenv autoload
 eval "$(pyenv init -)"
+# sheldon autoload
+eval "$(sheldon source)"
 
 # zsh-packages-setup
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.sheldon/repos/github.com/romkatv/powerlevel10k/powerlevel10k.zsh-theme
 # zsh-highlighting
-source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.sheldon/repos/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.sheldon/repos/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh

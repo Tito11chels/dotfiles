@@ -2,7 +2,6 @@
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-export HOMEBREW_GITHUB_API_TOKEN=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
 export LANG=ja_JP.UTF-8
 export HISTFILE=$ZSH_DIR/.zsh_history
 

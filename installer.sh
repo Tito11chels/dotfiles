@@ -40,5 +40,7 @@ mv .latexmkrc ~/
 
 # install miniconda via pyenv
 pyenv install miniconda3-latest
+# set miniconda3-latest as global
+pyenv global miniconda3-latest
 ## install python packages
 conda install jupyter numpy pandas matplotlib scipy

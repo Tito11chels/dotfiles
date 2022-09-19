@@ -4,14 +4,24 @@ wget https://github.com/TakumiO/dotfiles/archive/master.tar.gz
 tar -zxvf master.tar.gz
 cd dotfiles-master
 
-# install zsh neovim shelldon
+# install essential packages
 # detect homebrew
 if type brew > /dev/null 2>&1; then
   brew install zsh neovim shelldon
 else
-  echo "installing brew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew install zsh neovim shelldon
+  # detect OS
+  if [ "$(uname)" == 'Darwin' ]; then
+    xcode-select --install
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    brew install zsh neovim shelldon pandoc pyenv nodenv rbenv  
+    # install anotheessential Casks
+    brew install --cask iterm2 google-chrome visual-studio-code google-japanese-ime
+  elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+    echo "installing brew"
+    sudo apt install build-essential curl file git
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew install zsh neovim shelldon pandoc pyenv nodenv rbenv 
+  fi
 fi
 
 ln -s .zsh/.zshrc ~/.zshrc
@@ -27,3 +37,8 @@ mv ~/nvim ~/.config/nvim
 
 # move .latexmkrc
 mv .latexmkrc ~/
+
+# install miniconda via pyenv
+pyenv install miniconda3-latest
+## install python packages
+conda install jupyter numpy pandas matplotlib scipy

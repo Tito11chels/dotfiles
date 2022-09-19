@@ -24,3 +24,6 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # move nvim config dir
 mkdir ~/.config
 mv ~/nvim ~/.config/nvim
+
+# move .latexmkrc
+mv .latexmkrc ~/

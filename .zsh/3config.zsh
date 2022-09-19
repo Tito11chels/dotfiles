@@ -6,7 +6,7 @@ export LANG=ja_JP.UTF-8
 export HISTFILE=$ZSH_DIR/.zsh_history
 export SHELDON_CONFIG_DIR=$HOME/dotfiles/.sheldon
 export SHELDON_DATA_DIR=$HOME/dotfiles/.sheldon
-
+export DOT_DIR="$HOME/dotfiles"
 
 # 設定
 bindkey -e

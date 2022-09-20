@@ -13,14 +13,19 @@ else
   if [ "$(uname)" == 'Darwin' ]; then
     xcode-select --install
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    brew install zsh neovim shelldon pandoc pyenv nodenv rbenv  
+    brew install zsh neovim shelldon pandoc pyenv nodenv rbenv mactex-no-gui tex-live-utility
     # install anotheessential Casks
-    brew install --cask iterm2 google-chrome visual-studio-code google-japanese-ime
+    brew install iterm2 google-chrome visual-studio-code google-japanese-ime min
   elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     echo "installing brew"
     sudo apt install build-essential curl file git
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew install zsh neovim shelldon pandoc pyenv nodenv rbenv 
+  # install texlive
+  wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+  tar -zxvf install-tl-unx.tar.gz
+  cd install-tl-* && sudo ./install-tl
+  sudo /usr/local/texlive/????/bin/*/tlmgr path add
   fi
 fi
 

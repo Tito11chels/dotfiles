@@ -24,3 +24,8 @@ eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 # sheldon autoload
 eval "$(sheldon source)"
+
+# if use linux and use homebrew
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi

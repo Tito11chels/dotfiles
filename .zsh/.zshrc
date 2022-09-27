@@ -14,3 +14,8 @@ if type brew &>/dev/null; then
     autoload -Uz compinit
     compinit -d $HOME/dotfiles/.zsh/.zcompdump
 fi
+
+# if use linux and use homebrew
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi

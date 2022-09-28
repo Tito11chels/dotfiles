@@ -2,5 +2,6 @@
 .zsh/.zsh_history
 .zsh/.zcompdump
 .zsh/HOMEBREW_GITHUB_API_TOKEN.zsh
+.zsh/opam.zsh
 .sheldon/repos
 .sheldon/plugins.lock

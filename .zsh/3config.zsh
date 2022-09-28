@@ -7,6 +7,7 @@ export HISTFILE=$ZSH_DIR/.zsh_history
 export SHELDON_CONFIG_DIR=$HOME/dotfiles/.sheldon
 export SHELDON_DATA_DIR=$HOME/dotfiles/.sheldon
 export DOT_DIR="$HOME/dotfiles"
+export WEZTERM_CONFIG="$DOT_DIR/.wezterm/wezterm.lua"
 
 # 設定
 bindkey -e

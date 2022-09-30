@@ -1,5 +1,6 @@
 alias tree="tree -N"
 alias ls="lsd -A"
+alias ll="lsd -lA"
 alias cat="bat"
 if [ "$(uname)" = "Darwin" ]; then
     alias brew="env PATH=${PATH/\/Users\/$USER\/\.*env:/} brew"

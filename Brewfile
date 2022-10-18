@@ -1,3 +1,5 @@
+cask_args appdir: "/Applications"
+
 # formurae
 brew "bat"
 brew "ruby"
@@ -43,7 +45,8 @@ tap "zegervdv/zathura"
 tap "mas-cli/tap"
 
 # fonts
-brew "meslo-lg-nerd-font"
+cask "font-meslo-lg-nerd-font"
+cask "font-inconsolata"
 
 # casks
 cask "alfred"
@@ -53,15 +56,12 @@ cask "brave-browser"
 cask "cleanmymac"
 cask "deepl"
 cask "fliqlo"
-cask "font-inconsolata"
-cask "font-meslo-lg-nerd-font"
 cask "github"
 cask "google-drive"
 cask "google-japanese-ime"
 cask "iina"
 cask "iterm2"
 cask "keyboard-cleaner"
-cask "kindle"
 cask "latexit"
 cask "mactex-no-gui"
 cask "microsoft-auto-update"
@@ -87,11 +87,12 @@ cask "xquartz"
 cask "zoom"
 
 # mas
-mas install 1510445899 #meeter
-mas install 1482920575 #DuckDuckGo Privacy for Safari
-mas install 585829637  #Todoist
-mas install 1440147259 #AdGuard for Safari
-mas install 1380563956 #辞書 by 物書堂
-mas install 539883307  #LINE
-mas install 441258766  #Magnet
-mas install 1482454543 #Twitter
+mas 'Kindle', id: 405399194
+mas 'LINE', id: 539883307
+mas 'Magnet', id: 441258766
+mas 'Twitter', id: 1482454543
+mas 'meeter', id: 1510445899
+mas 'DuckDuckGo Privacy for Safari', id: 1482920575
+mas 'Todoist', id: 585829637
+mas 'AdGuard for Safari', id: 1440147259
+mas '辞書 by 物書堂', id: 1380563956

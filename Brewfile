@@ -87,9 +87,11 @@ cask "xquartz"
 cask "zoom"
 
 # mas
-mas "line", id: 539883307
-mas "Twitter", id: 409789998
-mas "todoist", id: 585829637
-mas "dictonaly", id: 1380563956
-mas "Kindle", id: 405399194
-mas "duckduckgo_safari", id: 1480068668
+mas install 1510445899 #meeter
+mas install 1482920575 #DuckDuckGo Privacy for Safari
+mas install 585829637  #Todoist
+mas install 1440147259 #AdGuard for Safari
+mas install 1380563956 #辞書 by 物書堂
+mas install 539883307  #LINE
+mas install 441258766  #Magnet
+mas install 1482454543 #Twitter

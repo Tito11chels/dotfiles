@@ -7,6 +7,7 @@ export HISTFILE=$ZSH_DIR/.zsh_history
 export SHELDON_CONFIG_DIR=$HOME/dotfiles/.sheldon
 export SHELDON_DATA_DIR=$HOME/dotfiles/.sheldon
 export DOT_DIR="$HOME/dotfiles"
+export HOMEBREW_GIT_PATH="/home/linuxbrew/.linuxbrew/bin/git"
 
 # 設定
 bindkey -e
@@ -24,8 +25,3 @@ eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 # sheldon autoload
 eval "$(sheldon source)"
-
-# if use linux and use homebrew
-if [ -d /home/linuxbrew/.linuxbrew ]; then
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-fi

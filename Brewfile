@@ -30,6 +30,7 @@ brew "htrb/tap/ngraph-gtk"
 brew "zegervdv/zathura/girara", args: ["HEAD"]
 brew "zegervdv/zathura/zathura", args: ["HEAD"]
 brew "zegervdv/zathura/zathura-pdf-poppler"
+brew "mas"
 
 # tap
 tap "homebrew/bundle"
@@ -39,6 +40,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "htrb/tap"
 tap "zegervdv/zathura"
+tap "mas-cli/tap"
 
 # fonts
 brew "meslo-lg-nerd-font"
@@ -83,3 +85,11 @@ cask "vlc"
 cask "webex"
 cask "xquartz"
 cask "zoom"
+
+# mas
+mas "line", id: 539883307
+mas "Twitter", id: 409789998
+mas "todoist", id: 585829637
+mas "dictonaly", id: 1380563956
+mas "Kindle", id: 405399194
+mas "duckduckgo_safari", id: 1480068668

@@ -1,5 +1,0 @@
-require('base')
-require('highlights')
-require('keymap')
-require('plugins')
-require('vim-latex')

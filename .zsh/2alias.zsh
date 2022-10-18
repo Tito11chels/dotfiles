@@ -1,11 +1,12 @@
 alias tree="tree -N"
 alias ls="lsd -A"
-alias ll="lsd -lA"
+alias ll="lsd -Al"
 alias cat="bat"
+if [ "$(uname)" = "Darwin" ]; then
+    alias brew="env PATH=${PATH/\/Users\/$USER\/\.*env:/} brew"
+fi
 alias vim="nvim"
 alias vi="nvim"
 
 alias ,viz="nvim $ZSH_DIR"
 alias ,viv="nvim ~/.config/nvim/lua"
-
-alias ,mktex="touch $(pwd).tex && mv ../$(pwd).tex $(pwd)/$(pwd).tex"

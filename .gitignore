@@ -5,3 +5,4 @@
 .zsh/opam.zsh
 .sheldon/repos
 .sheldon/plugins.lock
+Brewfile.lock.json

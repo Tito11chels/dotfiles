@@ -26,10 +26,10 @@ brew "sevenzip"
 brew "sheldon"
 brew "smartmontools"
 brew "speedtest-cli"
+brew "tar"
 brew "tree"
 brew "tsduck"
 brew "zsh"
-brew "htrb/tap/ngraph-gtk"
 brew "zegervdv/zathura/girara", args: ["HEAD"]
 brew "zegervdv/zathura/zathura", args: ["HEAD"]
 brew "zegervdv/zathura/zathura-pdf-poppler"
@@ -50,6 +50,7 @@ cask "font-meslo-lg-nerd-font"
 cask "font-inconsolata"
 
 # casks
+cask "htrb/tap/ngraph-gtk"
 cask "alfred"
 cask "apparency"
 cask "balenaetcher"

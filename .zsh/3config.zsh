@@ -1,4 +1,5 @@
 # 変数の設定
+export ZSH_DIR="$HOME/dotfiles/.zsh"
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"

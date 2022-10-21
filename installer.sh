@@ -4,11 +4,10 @@
 cd ~ 
 mv dotfiles-* dotfiles
 
-cd ~/dotfiles
-
 # make symbolic link to .zshrc
-ln -s .zshrc ~/.zshrc
+ln -s ~/dotfiles/.zshrc ~/.zshrc
 
+cd ~/dotfiles
 # install apps with homebrew
 brew bundle
 

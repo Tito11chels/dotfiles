@@ -33,6 +33,4 @@ return require('packer').startup(function(use)
   use 'tjdevries/nlua.nvim'
   --- lua lsp
   use 'neovim/nvim-lspconfig'
-  --- lua neovim config
-  use 'tjdevries/config_manager'
 end)

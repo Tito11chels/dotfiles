@@ -7,3 +7,4 @@
 .sheldon/repos
 .sheldon/plugins.lock
 Brewfile.lock.json
+.config/nvim/plugin

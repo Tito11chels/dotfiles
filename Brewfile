@@ -31,7 +31,10 @@ brew "gnupg"
 brew "gnuplot"
 brew "go"
 brew "gsl"
+brew "gstreamer"
+brew "gst-plugins-base"
 brew "gst-libav"
+brew "gst-plugins-good"
 brew "hello"
 brew "imagemagick"
 brew "openblas"
@@ -78,6 +81,7 @@ cask "bartender"
 cask "brave-browser"
 cask "cleanmymac"
 cask "deepl"
+cask "fiji"
 cask "fliqlo"
 cask "font-biz-udgothic"
 cask "font-biz-udmincho"
@@ -111,12 +115,3 @@ cask "visual-studio-code"
 cask "vlc"
 cask "webex"
 cask "zoom"
-mas "AdGuard for Safari", id: 1440147259
-mas "DuckDuckGo Privacy for Safari", id: 1482920575
-mas "Kindle", id: 405399194
-mas "LINE", id: 539883307
-mas "Magnet", id: 441258766
-mas "Meeter", id: 1510445899
-mas "Todoist", id: 585829637
-mas "Twitter", id: 1482454543
-mas "辞書 by 物書堂", id: 1380563956

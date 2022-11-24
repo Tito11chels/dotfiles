@@ -19,6 +19,3 @@ fi
 if [ -n "$WSL_DISTRO_NAME" ]; then
     export DISPLAY=`hostname`.mshome.net:0.0
 fi
-
-# setting for fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

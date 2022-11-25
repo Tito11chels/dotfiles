@@ -1,0 +1,11 @@
+*.DS_Store
+.zsh/.zsh_history
+.zsh/.zcompdump
+.zsh/HOMEBREW_GITHUB_API_TOKEN.zsh
+.zsh/opam.zsh
+.zsh/conda.zsh
+.sheldon/repos
+.sheldon/plugins.lock
+Brewfile.lock.json
+.config/nvim/plugin
+.zsh/01for_wsl.zsh

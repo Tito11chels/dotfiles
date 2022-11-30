@@ -11,3 +11,4 @@ Brewfile.lock.json
 .zsh/01for_wsl.zsh
 .emacs.d/auto-save-list
 .emacs.d/elpa
+.emacs.d/transient

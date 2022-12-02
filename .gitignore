@@ -9,3 +9,6 @@
 Brewfile.lock.json
 .config/nvim/plugin
 .zsh/01for_wsl.zsh
+.emacs.d/auto-save-list
+.emacs.d/elpa
+.emacs.d/transient

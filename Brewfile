@@ -107,7 +107,6 @@ cask "xquartz"
 cask "zoom"
 mas "1Blocker", id: 1365531024
 mas "DuckDuckGo Privacy for Safari", id: 1482920575
-mas "iMovie", id: 408981434
 mas "Kindle", id: 405399194
 mas "LINE", id: 539883307
 mas "Magnet", id: 441258766

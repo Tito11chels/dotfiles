@@ -11,3 +11,5 @@ fi
 # Key bindings
 # ------------
 source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+
+export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers --line-range :500 {}"'

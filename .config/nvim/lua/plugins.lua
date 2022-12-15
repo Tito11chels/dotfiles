@@ -33,4 +33,7 @@ return require('packer').startup(function(use)
   use 'tjdevries/nlua.nvim'
   --- lua lsp
   use 'neovim/nvim-lspconfig'
+
+  -- fzf.vim
+  use 'junegunn/fzf.vim'
 end)

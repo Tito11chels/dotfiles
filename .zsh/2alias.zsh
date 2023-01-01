@@ -5,3 +5,6 @@ alias cat="bat"
 if [ "$(uname)" = "Darwin" ]; then
     alias brew="env PATH=${PATH/\/Users\/$USER\/\.*env:/} brew"
 fi
+
+alias vim="nvim"
+alias vi="nvim"

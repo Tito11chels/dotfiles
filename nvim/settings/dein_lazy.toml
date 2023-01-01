@@ -1,0 +1,8 @@
+## latex-vim
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft = ['latex','tex']
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_ft = ['latex','tex']

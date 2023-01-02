@@ -39,8 +39,3 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-hook_ad = '''
-	nnoremap <silent> gs :Gstatus<CR><C-w>T
-	nnoremap <silent> gps :Gpush<CR>
-	nnoremap <silent> gpl :Gpull<CR>
-	'''

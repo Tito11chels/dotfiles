@@ -26,9 +26,11 @@ repo = 'lambdalisue/fern-git-status.vim'
 [[plugins]]
 repo = 'lambdalisue/fern-renderer-nerdfont.vim'
 
-
 [[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-hijack.vim'
 
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
@@ -39,3 +41,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'

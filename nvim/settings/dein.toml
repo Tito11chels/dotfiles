@@ -19,7 +19,6 @@ repo = 'olimorris/onedarkpro.nvim'
 [[plugins]]
 repo = 'github/copilot.vim'
 
-
 [[plugins]]
 repo = 'lambdalisue/fern-git-status.vim'
 
@@ -43,10 +42,8 @@ hook_add = '''
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
-repo = 'Shougo/ddc.vim'
-
-[[plugins]]
-repo = 'vim-denops/denops.vim'
-
-[[plugins]]
-repo = 'neovim/nvim-lspconfig'
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+on_i = 1
+merged = '0'
+hook_source = 'call coil398#init#coc#hook_source()'

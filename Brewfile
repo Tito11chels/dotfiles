@@ -115,5 +115,3 @@ mas "Todoist", id: 585829637
 mas "Twitter", id: 1482454543
 mas "辞書 by 物書堂", id: 1380563956
 mas "Speedtest by Ookla", id: 1153157709
-
-brew "texlive", args: ["with-lang-japanese"]

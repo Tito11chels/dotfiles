@@ -8,7 +8,6 @@ export HISTFILE="$ZSH_DIR/.zsh_history"
 export SHELDON_CONFIG_DIR="$HOME/dotfiles/.sheldon"
 export SHELDON_DATA_DIR="$HOME/dotfiles/.sheldon"
 export DOT_DIR="$HOME/dotfiles"
-export HOMEBREW_GIT_PATH="/home/linuxbrew/.linuxbrew/bin/git"
 export BAT_CONFIG_PATH="$HOME/dotfiles/bat/bat.conf"
 
 # 設定

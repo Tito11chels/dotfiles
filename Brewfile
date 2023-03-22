@@ -57,7 +57,6 @@ brew "sevenzip"
 brew "sheldon"
 brew "sl"
 brew "smartmontools"
-brew "speedtest-cli"
 brew "subversion"
 brew "tree"
 brew "tsduck"
@@ -86,7 +85,6 @@ cask "julia"
 cask "keyboard-cleaner"
 cask "latexit"
 cask "lockrattler"
-cask "mactex-no-gui"
 cask "microsoft-auto-update"
 cask "microsoft-excel"
 cask "microsoft-powerpoint"
@@ -116,3 +114,6 @@ mas "Meeter", id: 1510445899
 mas "Todoist", id: 585829637
 mas "Twitter", id: 1482454543
 mas "辞書 by 物書堂", id: 1380563956
+mas "Speedtest by Ookla", id: 1153157709
+
+brew "texlive", args: ["with-lang-japanese"]

@@ -1,7 +1,7 @@
 # 変数の設定
 export ZSH_DIR="$HOME/dotfiles/.zsh"
-export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+export LDFLAGS="-L$(brew --prefix)/opt/curl/lib"
+export CPPFLAGS="-I$(brew --prefix)/opt/curl/include"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export LANG=ja_JP.UTF-8
 export HISTFILE="$ZSH_DIR/.zsh_history"
@@ -23,6 +23,8 @@ eval "$(nodenv init -)"
 # rbenv autoload
 eval "$(rbenv init -)"
 # pyenv autoload
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
 # sheldon autoload
 eval "$(sheldon source)"

@@ -1,8 +1,9 @@
+#!/usr/bin/env perl
 if ($^O eq 'MSWin32') {
-  $latex = 'uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode %S -file-line-error ';
-  $pdflatex = 'pdflatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
-  $lualatex = 'lualatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
-  $xelatex = 'xelatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
+  $latex = 'uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 %S';
+  $pdflatex = 'pdflatex %O -synctex=1 %S';
+  $lualatex = 'lualatex %O -synctex=1 %S';
+  $xelatex = 'xelatex %O -synctex=1 %S';
   $biber = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';
   $bibtex = 'upbibtex %O %B';
   $makeindex = 'upmendex %O -o %D %S';
@@ -18,10 +19,10 @@ if ($^O eq 'MSWin32') {
     $pdf_previewer = 'texworks';
   }
 } else {
-  $latex = 'uplatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
-  $pdflatex = 'pdflatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
-  $lualatex = 'lualatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
-  $xelatex = 'xelatex %O -synctex=1 -interaction=nonstopmode %S -file-line-error ';
+  $latex = 'uplatex %O -synctex=1 %S';
+  $pdflatex = 'pdflatex %O -synctex=1 %S';
+  $lualatex = 'lualatex %O -synctex=1 %S';
+  $xelatex = 'xelatex %O -synctex=1 %S';
   $biber = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';
   $bibtex = 'upbibtex %O %B';
   $makeindex = 'upmendex %O -o %D %S';
@@ -31,7 +32,7 @@ if ($^O eq 'MSWin32') {
   $pdf_mode = 3;
   if ($^O eq 'darwin') {
     $pvc_view_file_via_temporary = 0;
-    $pdf_previewer = 'open -a Skim';
+    $pdf_previewer = 'open -ga /Applications/Skim.app';
   } else {
     $pdf_previewer = 'xdg-open';
   }

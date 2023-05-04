@@ -6,9 +6,10 @@ export PATH="/usr/local/bin:$PATH"
 
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.pyenv/shims:$PATH"
-export PATH="$HOME/.rbenv/shims:$PATH"
-export PATH="$HOME/.nodenv/shims:$PATH"
+
+# set anyenv
+export PATH="$HOME/.anyenv/envs:$PATH"
+
 # if macOS, then set tlmgr
 if [ "$(uname)" = 'Darwin' ]; then
     export PATH="/usr/local/texlive/2023/bin/universal-darwin/:$PATH"

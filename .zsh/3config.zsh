@@ -18,14 +18,13 @@ setopt hist_ignore_space
 setopt auto_param_keys
 disable r
 
-# nodenv autoload
-eval "$(nodenv init -)"
-# rbenv autoload
-eval "$(rbenv init -)"
-# pyenv autoload
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
+# set **env
+eval "$(anyenv init -)"
+## set pyenv
+export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
 # sheldon autoload
 eval "$(sheldon source)"
 

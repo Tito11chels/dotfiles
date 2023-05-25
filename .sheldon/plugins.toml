@@ -35,3 +35,5 @@ github = "changyuheng/zsh-interactive-cd"
 github = "esc/conda-zsh-completion"
 [plugins.fzf-zsh-completions]
 github = 'chitoku-k/fzf-zsh-completions'
+[plugins.zsh-256color]
+github = 'chrissicool/zsh-256color'

@@ -10,7 +10,7 @@ fi
 
 # Key bindings
 # ------------
-source "$(brew --prefix)/Cellar/fzf/0.40.0/shell/key-bindings.zsh"
+source "$(brew --prefix)/Cellar/fzf/$(fzf --version | sed 's/[^0-9.]*//g')/shell/key-bindings.zsh"
 
 export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers --line-range :500 {}"'
 

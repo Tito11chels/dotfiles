@@ -6,7 +6,7 @@ fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "$(brew --prefix)/Cellar/fzf/0.40.0/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$(brew --prefix)/Cellar/fzf/$(fzf --version | sed 's/[^0-9.]*//g')/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------

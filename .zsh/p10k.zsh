@@ -97,16 +97,16 @@
     disk_usage            # disk usage
     ram                   # free RAM
     swap                  # used swap
-    todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+    # todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     # timewarrior             # timewarrior tracking status (https://timewarrior.net/)
-    taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
+    # taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
-    battery               # internal battery
+    # battery               # internal battery
     wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
   )

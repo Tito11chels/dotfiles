@@ -34,3 +34,6 @@ export BAT_PAGER="less -RF"
 
 # set local::lib
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+
+# set asdf
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh

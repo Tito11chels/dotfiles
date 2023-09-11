@@ -12,3 +12,4 @@ Brewfile.lock.json
 .emacs.d/auto-save-list
 .emacs.d/elpa
 .emacs.d/transient
+.zsh/mamba.zsh

@@ -26,7 +26,7 @@ brew "gh"
 brew "ghostscript"
 brew "git"
 brew "git-lfs"
-brew "gnu-cobol"
+brew "gnucobol"
 brew "gnupg"
 brew "gnuplot"
 brew "go"
@@ -40,14 +40,14 @@ brew "lsd"
 brew "lv"
 brew "mas"
 brew "neofetch"
-brew "neovim"
 brew "nyancat"
 brew "openblas"
 brew "pandoc"
 brew "pandoc-crossref"
 brew "pandoc-plot"
-brew "perl"
 brew "poppler"
+brew "pdfpc"
+brew "perl"
 brew "r"
 brew "rename"
 brew "ripgrep"
@@ -64,6 +64,7 @@ brew "subversion"
 brew "tree"
 brew "tsduck"
 brew "viu"
+brew "vim"
 brew "wget"
 brew "zsh"
 brew "htrb/tap/ngraph-gtk"
@@ -114,6 +115,18 @@ cask "webex"
 cask "xquartz"
 cask "zoom"
 cask "zotero"
+mas "1Blocker", id: 1365531024
+mas "DuckDuckGo Privacy for Safari", id: 1482920575
+mas "Goodnotes", id: 1444383602
+mas "HP Smart", id: 1474276998
+mas "Keynote", id: 409183694
+mas "Kindle", id: 302584613
+mas "LINE", id: 539883307
+mas "Magnet", id: 441258766
+mas "Meeter", id: 1510445899
+mas "Shapr3D", id: 1091675654
+mas "Speedtest", id: 1153157709
+mas "辞書 by 物書堂", id: 1380563956
 vscode "bierner.color-info"
 vscode "christian-kohler.path-intellisense"
 vscode "codezombiech.gitignore"

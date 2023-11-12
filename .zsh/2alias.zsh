@@ -8,5 +8,4 @@ fi
 
 alias grep="rg --color=auto"
 
-alias vim="nvim"
-alias vi="nvim"
+alias vi="vim"

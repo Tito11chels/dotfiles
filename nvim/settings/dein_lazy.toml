@@ -1,4 +1,0 @@
-## latex-vim
-[[plugins]]
-repo = 'lervag/vimtex'
-on_ft = ['latex','tex']

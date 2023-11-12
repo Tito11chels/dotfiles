@@ -37,3 +37,5 @@ github = "esc/conda-zsh-completion"
 github = 'chitoku-k/fzf-zsh-completions'
 [plugins.zsh-256color]
 github = 'chrissicool/zsh-256color'
+[plugins.zshmarks]
+github = 'jocelynmallon/zshmarks'

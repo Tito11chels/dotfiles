@@ -20,7 +20,8 @@ shell = "zsh"
 # github = "chriskempson/base16-shell"
 
 [plugins.zsh-autosuggestions]
-github = "zsh-users/zsh-autosuggestions"
+github = 'zsh-users/zsh-autosuggestions'
+use = ['{{ name }}.zsh']
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 [plugins.zsh-completions]
@@ -33,9 +34,15 @@ github = "zsh-users/zsh-history-substring-search"
 github = "changyuheng/zsh-interactive-cd"
 [plugins.conda-zsh-completion]
 github = "esc/conda-zsh-completion"
-[plugins.fzf-zsh-completions]
-github = 'chitoku-k/fzf-zsh-completions'
 [plugins.zsh-256color]
 github = 'chrissicool/zsh-256color'
 [plugins.zshmarks]
 github = 'jocelynmallon/zshmarks'
+[plugins.kubectl-completion]
+remote = "https://raw.githubusercontent.com/nnao45/zsh-kubectl-completion/master/_kubectl"
+apply = ["fpath"]
+[plugins.fzf-zsh-completions]
+github = 'chitoku-k/fzf-zsh-completions'
+use = ['fzf-zsh-completions.plugin.zsh']
+[plugins.zeno]
+github = 'yuki-yano/zeno.zsh'

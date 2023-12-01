@@ -1,9 +1,9 @@
+export PATH=$PATH:/usr/local/bin
 export PATH="$(brew --prefix)/bin:$PATH"
 export PATH="$(brew --prefix)/Celler:$PATH"
 export PATH="$(brew --prefix)/opt/curl/bin:$PATH"
 export PATH="$(brew --prefix)/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-
 
 export PATH="$HOME/.cargo/bin:$PATH"
 

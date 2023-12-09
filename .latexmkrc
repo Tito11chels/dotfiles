@@ -18,6 +18,7 @@ if ($^O eq 'MSWin32') {
   } else {
     $pdf_previewer = 'texworks';
   }
+  $out_dir = 'out';
 } else {
   $latex = 'uplatex %O -synctex=1 %S';
   $pdflatex = 'pdflatex %O -synctex=1 %S';
@@ -30,9 +31,10 @@ if ($^O eq 'MSWin32') {
   $dvips = 'dvips %O -z -f %S | convbkmk -u > %D';
   $ps2pdf = 'ps2pdf %O %S %D';
   $pdf_mode = 3;
+  $out_dir = 'out';
   if ($^O eq 'darwin') {
     $pvc_view_file_via_temporary = 0;
-    $pdf_previewer = 'open -ga /Applications/Skim.app';
+    $pdf_previewer = 'code -r -g %R';
   } else {
     $pdf_previewer = 'xdg-open';
   }

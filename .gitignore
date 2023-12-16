@@ -13,3 +13,4 @@ Brewfile.lock.json
 .emacs.d/elpa
 .emacs.d/transient
 .zsh/mamba.zsh
+.zsh/0brew.zsh

@@ -1,4 +1,5 @@
 export ZSHCONF_DIR="$HOME/dotfiles/.zsh"
+export BREW_PREFIX=$(brew --prefix)
 
 # .zshがディレクトリで、読み取り、実行、が可能なとき
 if [ -d $ZSHCONF_DIR ] && [ -r $ZSHCONF_DIR ] && [ -x $ZSHCONF_DIR ]; then
@@ -23,6 +24,17 @@ if [ "$(uname)" = 'Darwin' ]; then
 fi
 # configure Homebrew for wsl
 if [ -n "$WSL_DISTRO_NAME" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    if type brew &>/dev/null
+        then
+        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+        autoload -Uz compinit
+        compinit
+    fi
+fi
+# configure Homebrew for linux
+if [ "$(uname)" = 'Linux' ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     if type brew &>/dev/null
         then

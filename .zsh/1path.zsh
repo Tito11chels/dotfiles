@@ -11,11 +11,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.anyenv/envs:$PATH"
 
 # if macOS, then set tlmgr
+TEXLIVE_YEAR=$(date +%Y)
 if [ "$(uname)" = 'Darwin' ]; then
-    export PATH="/usr/local/texlive/2023/bin/universal-darwin/:$PATH"
+  export PATH="/usr/local/texlive/$TEXLIVE_YEAR/bin/universal-darwin/:$PATH"
 else
-    export PATH="/usr/local/texlive/2023/bin/x86_64-linux/:$PATH"
+  export PATH="/usr/local/texlive/$TEXLIVE_YEAR/bin/x86_64-linux/:$PATH"
 fi
 
-export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
-export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
+export MANPATH="/usr/local/texlive/$TEXLIVE_YEAR/texmf-dist/doc/man:$MANPATH"
+export INFOPATH="/usr/local/texlive/$TEXLIVE_YEAR/texmf-dist/doc/info:$INFOPATH"

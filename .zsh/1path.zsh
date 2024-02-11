@@ -11,7 +11,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.anyenv/envs:$PATH"
 
 # if macOS, then set tlmgr
-TEXLIVE_YEAR=$(date +%Y)
+TEXLIVE_YEAR=2023
 if [ "$(uname)" = 'Darwin' ]; then
   export PATH="/usr/local/texlive/$TEXLIVE_YEAR/bin/universal-darwin/:$PATH"
 else

@@ -35,6 +35,7 @@ brew "go"
 brew "gsl"
 brew "hello"
 brew "imagemagick"
+brew "isort"
 brew "jpeg"
 brew "liblzf"
 brew "lsd"
@@ -47,6 +48,7 @@ brew "openblas"
 brew "pandoc"
 brew "pandoc-crossref"
 brew "pandoc-plot"
+brew "poetry"
 brew "poppler"
 brew "pdfpc"
 brew "pdfrip"
@@ -126,3 +128,5 @@ mas "Magnet", id: 441258766
 mas "Meeter", id: 1510445899
 mas "Speedtest", id: 1153157709
 mas "辞書 by 物書堂", id: 1380563956
+mas "DaVinci Resolve", id: 571213070
+mas "DaisyDisk", id: 411643860

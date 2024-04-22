@@ -5,8 +5,6 @@ export PATH="$(brew --prefix)/opt/curl/bin:$PATH"
 export PATH="$(brew --prefix)/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # set anyenv
 export PATH="$HOME/.anyenv/envs:$PATH"
 

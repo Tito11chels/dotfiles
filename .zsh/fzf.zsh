@@ -5,3 +5,4 @@ if [[ ! "$PATH" == *$(brew --prefix)/fzf/bin* ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"

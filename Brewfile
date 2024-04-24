@@ -5,13 +5,11 @@ tap "homebrew/services"
 tap "htrb/tap" if OS.mac?
 # tap zegervdv only for macOS
 tap "mas-cli/tap" if OS.mac?
-tap "zegervdv/zathura"
 brew "anyenv"
 brew "openexr"
 brew "asdf"
 brew "bat"
 brew "curl"
-brew "deno"
 brew "fzf"
 brew "gh"
 brew "git"
@@ -29,7 +27,7 @@ brew "tree"
 brew "wget"
 brew "zsh"
 brew "htrb/tap/ngraph-gtk" if OS.mac?
-brew "zegervdv/zathura/zathura"
+cask "adode-acrobat-reader"
 cask "alfred"
 cask "apparency"
 cask "cleanmymac"
@@ -75,10 +73,8 @@ cask "zotero"
 mas "AdGuard for Safari", id: 1440147259
 mas "Amphetamine", id: 937984704
 mas "DuckDuckGo Privacy for Safari", id: 1482920575
-mas "Goodnotes", id: 1444383602
 mas "HP Smart", id: 1474276998
 mas "Keynote", id: 409183694
-mas "Kindle", id: 302584613
 mas "LINE", id: 539883307
 mas "Magnet", id: 441258766
 mas "Meeter", id: 1510445899

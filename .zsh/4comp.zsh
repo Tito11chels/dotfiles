@@ -21,10 +21,3 @@ colors
 export LS_COLORS='di=34:ln=40:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 ## ファイル補完候補に色を付ける
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-## cheat-sheet
-cheat-sheet () { zle -M "`cat $ZSH_DIR/cheat-sheet.conf`" }
-zle -N cheat-sheet
-bindkey "^[^h" cheat-sheet
-git-cheat () { zle -M "`cat $ZSH_DIR/git-cheat.conf`" }
-zle -N git-cheat
-bindkey "^[^g" git-cheat

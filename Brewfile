@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 tap "homebrew/services"
 # tap hrtb only for macOS
 tap "htrb/tap" if OS.mac?

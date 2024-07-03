@@ -9,6 +9,7 @@ export SHELDON_CONFIG_DIR="$HOME/dotfiles/.sheldon"
 export SHELDON_DATA_DIR="$HOME/dotfiles/.sheldon"
 export DOT_DIR="$HOME/dotfiles"
 export BAT_CONFIG_PATH="$HOME/dotfiles/bat/bat.conf"
+export TEXTLINTRC="$HOME/latexlinter_config/.textlintrc.json"
 
 # 設定
 bindkey -e

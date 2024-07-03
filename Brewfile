@@ -26,10 +26,12 @@ brew "tree"
 brew "wget"
 brew "zsh"
 brew "htrb/tap/ngraph-gtk" if OS.mac?
-cask "adode-acrobat-reader"
+cask "ngraph-gtk-launcher" if OS.mac?
+cask "adobe-acrobat-pro"
 cask "alfred"
 cask "apparency"
 cask "cleanmymac"
+cask "chatgpt"
 cask "deeper"
 cask "font-biz-udgothic"
 cask "font-biz-udmincho"

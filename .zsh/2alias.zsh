@@ -10,3 +10,8 @@ alias grep="rg --color=auto"
 
 alias vi="nvim"
 alias vim="nvim"
+
+alias tx="
+    ln -s ~/latexconfig/.textlintrc.json ./.textlintrc.json
+    ln -s ~/latexconfig/latexindent.yaml ./latexindent.yaml
+"

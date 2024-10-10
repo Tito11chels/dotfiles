@@ -18,11 +18,16 @@ setopt hist_ignore_space
 setopt auto_param_keys
 disable r
 
-# set **env
-eval "$(anyenv init -)"
+# set pyenv
+eval "$(pyenv init -)"
 
 # sheldon autoload
 eval "$(sheldon source)"
+
+# set basictex if macOS
+if [ "$(uname)" = 'Darwin' ]; then
+  eval "$(/usr/libexec/path_helper)"
+fi
 
 # set man pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

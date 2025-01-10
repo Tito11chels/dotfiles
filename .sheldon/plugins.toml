@@ -46,3 +46,5 @@ github = 'chitoku-k/fzf-zsh-completions'
 use = ['fzf-zsh-completions.plugin.zsh']
 [plugins.zeno]
 github = 'yuki-yano/zeno.zsh'
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"

@@ -18,9 +18,6 @@ setopt hist_ignore_space
 setopt auto_param_keys
 disable r
 
-# set pyenv
-eval "$(pyenv init -)"
-
 # sheldon autoload
 eval "$(sheldon source)"
 
@@ -37,4 +34,4 @@ export BAT_PAGER="less -RF"
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 # set asdf
-. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+source $(brew --prefix)/opt/asdf

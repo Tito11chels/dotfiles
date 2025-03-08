@@ -1,7 +1,7 @@
 export PATH="/usr/local/bin:$(brew --prefix)/bin:$(brew --prefix)/sbin:$(brew --prefix)/opt/curl/bin:${PATH}"
 
-# set anyenv
-export PATH="$HOME/.anyenv/envs:${PATH}"
+# set ASDF
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # if macOS, then set tlmgr
 TEXLIVE_YEAR=2024

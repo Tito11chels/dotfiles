@@ -1,10 +1,7 @@
-tap "homebrew/bundle"
-tap "homebrew/services"
 # tap hrtb only for macOS
 tap "htrb/tap" if OS.mac?
 # tap zegervdv only for macOS
 tap "mas-cli/tap" if OS.mac?
-brew "openexr"
 brew "asdf"
 brew "bat"
 brew "curl"
@@ -16,65 +13,65 @@ brew "gsl"
 brew "lsd"
 brew "lv"
 brew "mas"
-brew "neofetch"
-brew "node"
-brew "pdfpc"
-brew "perl"
-brew "python"
-brew "r"
+brew "fastfetch"
 brew "ripgrep"
-brew "ruby"
 brew "sheldon"
 brew "tree"
 brew "wget"
 brew "zsh"
 brew "htrb/tap/ngraph-gtk" if OS.mac?
 cask "ngraph-gtk-launcher" if OS.mac?
-cask "adobe-acrobat-pro"
 cask "arc"
 cask "apparency"
 cask "cleanmymac"
 cask "chatgpt"
 cask "deeper"
-cask "font-biz-udgothic"
-cask "font-biz-udmincho"
-cask "font-biz-udpgothic"
-cask "font-biz-udpmincho"
-cask "font-fira-sans"
-cask "font-hack-nerd-font"
-cask "font-ipaexfont"
-cask "font-meslo-lg-nerd-font"
-cask "font-noto-sans-cjk-jp"
 cask "gimp"
 cask "github"
-cask "hazeover"
-cask "iina"
 cask "inkscape"
 cask "iterm2"
-cask "julia"
 cask "keyboard-cleaner"
-cask "lockrattler"
 cask "logi-options-plus"
-cask "losslesscut"
 cask "microsoft-auto-update"
 cask "microsoft-excel"
 cask "microsoft-powerpoint"
 cask "microsoft-teams"
 cask "microsoft-word"
-cask "min"
-cask "numi"
 cask "onedrive"
 cask "raycast"
 cask "readdle-spark"
 cask "slidepilot"
-cask "tunnelblick"
 cask "visual-studio-code"
 cask "vivaldi"
 cask "vlc"
 cask "xquartz"
-cask "zoom"
 cask "zotero"
-mas "1blocker", id: 1107421413
+cask "adobe-acrobat-reader"
+cask "basictex"
+cask "pdf2svg"
+cask "pipx"
+
+# FONTS
+cask "font-biz-udgothic" if OS.mac?
+cask "font-biz-udmincho" if OS.mac?
+cask "font-biz-udpgothic" if OS.mac?
+cask "font-biz-udpmincho" if OS.mac?
+cask "font-eb-garamond" if OS.mac?
+cask "font-fira-sans" if OS.mac?
+cask "font-hack-nerd-font" if OS.mac?
+cask "font-ipaexfont" if OS.mac?
+cask "font-ipafont" if OS.mac?
+cask "font-ipamjmincho" if OS.mac?
+cask "font-meslo-lg-nerd-font" if OS.mac?
+cask "font-new-york" if OS.mac?
+cask "font-noto-sans-cjk-jp" if OS.mac?
+cask "font-noto-sans-mono-cjk-jp" if OS.mac?
+cask "font-sf-compact" if OS.mac?
+cask "font-sf-mono-for-powerline" if OS.mac?
+cask "font-sf-pro" if OS.mac?
+cask "font-source-sans-3" if OS.mac?
+cask "font-udev-gothic-nf" if OS.mac?
+
 mas "Amphetamine", id: 937984704
 mas "DuckDuckGo Privacy for Safari", id: 1482920575
 mas "HP Smart", id: 1474276998
@@ -85,3 +82,4 @@ mas "Speedtest", id: 1153157709
 mas "辞書 by 物書堂", id: 1380563956
 mas "DaVinci Resolve", id: 571213070
 mas "DaisyDisk", id: 411643860
+mas "AdGuard for Safari", id: 1440147259

@@ -31,6 +31,8 @@ zstyle ':fzf-tab:*' fzf-flags '--height=40%'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:*' continuous-trigger 'ctrl-space'
+# バイナリや画像ファイルを除外した安全なプレビュー設定例
+zstyle ':fzf-tab:complete:*:*' fzf-preview '[ -f "$realpath" ] && file --mime-type "$realpath" | grep -q "text" && less "$realpath" || echo "Binary or unsupported file type."'
 
 # Ctrl+R（履歴検索）の設定
 export FZF_CTRL_R_OPTS="

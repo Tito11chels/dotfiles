@@ -5,7 +5,6 @@ if [[ ! "$PATH" == *$(brew --prefix)/fzf/bin* ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(fzf --zsh)"
 
 # fzfの基本設定
 export FZF_DEFAULT_OPTS="

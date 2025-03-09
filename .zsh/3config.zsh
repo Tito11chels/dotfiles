@@ -28,10 +28,10 @@ fi
 
 # set man pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export BAT_PAGER="less -RF"
+export BAT_PAGER="less -FRX"
 
 # set local::lib
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 # set asdf
-source $(brew --prefix)/opt/asdf
+source "$(brew --prefix asdf)/libexec/asdf.sh"

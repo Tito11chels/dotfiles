@@ -49,6 +49,3 @@ fi
 if [ -n "$WSL_DISTRO_NAME" ]; then
     export DISPLAY=`hostname`.mshome.net:0.0
 fi
-
-# Created by `pipx` on 2024-07-17 15:17:56
-export PATH="$PATH:/Users/takumi/.local/bin"

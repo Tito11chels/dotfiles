@@ -2,7 +2,7 @@
 export ZSH_DIR="$HOME/dotfiles/.zsh"
 export LDFLAGS="-L$(brew --prefix)/opt/curl/lib"
 export CPPFLAGS="-I$(brew --prefix)/opt/curl/include"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 export LANG=ja_JP.UTF-8
 export HISTFILE="$ZSH_DIR/.zsh_history"
 export SHELDON_CONFIG_DIR="$HOME/dotfiles/.sheldon"

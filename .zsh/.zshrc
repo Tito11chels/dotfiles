@@ -44,8 +44,3 @@ if [ "$(uname)" = 'Linux' ]; then
         compinit
     fi
 fi
-
-# if it's wsl then set vcxsrv
-if [ -n "$WSL_DISTRO_NAME" ]; then
-    export DISPLAY=`hostname`.mshome.net:0.0
-fi

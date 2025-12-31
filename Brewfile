@@ -77,7 +77,6 @@ mas "DuckDuckGo Privacy for Safari", id: 1482920575
 mas "HP Smart", id: 1474276998
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
-mas "Magnet", id: 441258766
 mas "Speedtest", id: 1153157709
 mas "辞書 by 物書堂", id: 1380563956
 mas "DaVinci Resolve", id: 571213070

@@ -10,6 +10,8 @@ export SHELDON_DATA_DIR="$HOME/dotfiles/.sheldon"
 export DOT_DIR="$HOME/dotfiles"
 export BAT_CONFIG_PATH="$HOME/dotfiles/bat/bat.conf"
 
+export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB"
+
 # 設定
 bindkey -e
 setopt auto_pushd

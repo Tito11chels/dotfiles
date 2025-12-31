@@ -6,6 +6,11 @@ if [ "$(uname)" = "Darwin" ]; then
     alias brew="env PATH=${PATH/\/Users\/$USER\/\.*env:/} brew"
 fi
 
+# neovimがインストールされている場合はnvimを優先
+if command -v nvim >/dev/null 2>&1; then
+    alias vim="nvim"
+fi
+
 alias grep="rg --color=auto"
 
 alias tx="

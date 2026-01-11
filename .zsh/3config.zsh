@@ -10,10 +10,8 @@ export SHELDON_DATA_DIR="$HOME/dotfiles/.sheldon"
 export DOT_DIR="$HOME/dotfiles"
 export BAT_CONFIG_PATH="$HOME/dotfiles/bat/bat.conf"
 
-export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB"
-
 # 設定
-bindkey -e
+bindkey -v
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt hist_ignore_space
@@ -33,4 +31,5 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_PAGER="less -FRX"
 
 # set local::lib
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+export PATH="$HOME/bin:$PATH"

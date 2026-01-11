@@ -1,3 +1,5 @@
+export PATH="$HOME/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 export PATH="/usr/local/bin:$(brew --prefix)/bin:$(brew --prefix)/sbin:$(brew --prefix)/opt/curl/bin:${PATH}"
 
 # set ASDF

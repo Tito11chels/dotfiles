@@ -1,4 +1,3 @@
-alias tree="tree -N"
 alias ls="lsd -A"
 alias ll="lsd -Al"
 alias cat="bat"
@@ -17,3 +16,6 @@ alias tx="
     cp ~/latexconfig/.textlintrc.json ./.textlintrc.json
     cp ~/latexconfig/latexindent.yaml ./latexindent.yaml
 "
+
+alias tt="tree -N ."
+alias nv="nvim ."

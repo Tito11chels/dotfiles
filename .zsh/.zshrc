@@ -1,46 +1,33 @@
 export ZSHCONF_DIR="$HOME/dotfiles/.zsh"
-export BREW_PREFIX=$(brew --prefix)
 
-# .zshがディレクトリで、読み取り、実行、が可能なとき
-if [ -d $ZSHCONF_DIR ] && [ -r $ZSHCONF_DIR ] && [ -x $ZSHCONF_DIR ]; then
-    # zshディレクトリより下にある、.zshファイルの分、繰り返す
-    for file in ${ZSHCONF_DIR}/*.zsh; do
-        # 読み取り可能ならば実行する
-        [ -r $file ] && source $file
-    done
+# 他の設定ファイルを読み込む（1path.zsh は後で読み込むため除外）
+if [ -d "$ZSHCONF_DIR" ]; then
+  for file in "$ZSHCONF_DIR"/*.zsh; do
+    [ "$(basename "$file")" = "1path.zsh" ] && continue
+    [ -r "$file" ] && source "$file"
+  done
 fi
 
-# if macOS, then read this
-if [ "$(uname)" = 'Darwin' ]; then
-    # Homebrew
+# OSごとの brew shellenv をまとめて初期化
+case "$(uname)" in
+  Darwin)
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    if type brew &>/dev/null
-        then
-        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-        autoload -Uz compinit
-        compinit
-    fi
-fi
-# configure Homebrew for wsl
-if [ -n "$WSL_DISTRO_NAME" ]; then
+    ;;
+  *)
+    # Linux/WSL は linuxbrew を使用
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    if type brew &>/dev/null
-        then
-        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    ;;
+esac
 
-        autoload -Uz compinit
-        compinit
-    fi
+# brew が存在するときに補完を設定
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit
 fi
-# configure Homebrew for linux
-if [ "$(uname)" = 'Linux' ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    if type brew &>/dev/null
-        then
-        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-        autoload -Uz compinit
-        compinit
-    fi
+# PATH の優先順位を修正するため 1path.zsh を最後に読み込む
+if [ -r "$ZSHCONF_DIR/1path.zsh" ]; then
+  source "$ZSHCONF_DIR/1path.zsh"
+  hash -r
 fi

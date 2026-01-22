@@ -32,8 +32,6 @@ github = "romkatv/powerlevel10k"
 github = "zsh-users/zsh-history-substring-search"
 [plugins.zsh-interactive-cd]
 github = "changyuheng/zsh-interactive-cd"
-[plugins.conda-zsh-completion]
-github = "esc/conda-zsh-completion"
 [plugins.zsh-256color]
 github = 'chrissicool/zsh-256color'
 [plugins.zshmarks]

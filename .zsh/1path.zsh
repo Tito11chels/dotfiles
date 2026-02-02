@@ -13,6 +13,8 @@ if [[ -n "${ZSH_VERSION-}" ]]; then
   # - finally whatever PATH already had (system paths, etc.)
   path=(
     "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+    /opt/homebrew/opt/imagemagick-full/bin
+    /opt/homebrew/opt/ffmpeg-full/bin
     /opt/homebrew/bin
     /opt/homebrew/sbin
     /opt/homebrew/opt/curl/bin
@@ -26,5 +28,5 @@ if [[ -n "${ZSH_VERSION-}" ]]; then
   export PATH
 else
   # Fallback for non-zsh shells (best-effort, may not be fully idempotent)
-  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/curl/bin:/usr/local/bin:$HOME/bin:$HOME/.cargo/bin:/opt/homebrew/opt/rustup/bin:$PATH"
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:/opt/homebrew/opt/imagemagick-full/bin:/opt/homebrew/opt/ffmpeg-full/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/curl/bin:/usr/local/bin:$HOME/bin:$HOME/.cargo/bin:/opt/homebrew/opt/rustup/bin:$PATH"
 fi

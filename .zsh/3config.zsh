@@ -12,8 +12,39 @@ if command -v brew >/dev/null 2>&1; then
   HOMEBREW_PREFIX="$(brew --prefix)"
   OPENSSL_PREFIX="$(brew --prefix openssl@3)"
 
-  export LDFLAGS="-L$HOMEBREW_PREFIX/opt/curl/lib"
-  export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/curl/include"
+  # keg-only formula を含めたビルド系フラグを重複なく先頭に追加
+  for libdir in \
+    "$HOMEBREW_PREFIX/opt/curl/lib" \
+    "$HOMEBREW_PREFIX/opt/ffmpeg-full/lib" \
+    "$HOMEBREW_PREFIX/opt/imagemagick-full/lib"; do
+    case " ${LDFLAGS-} " in
+      *" -L$libdir "*) ;;
+      *) LDFLAGS="-L$libdir${LDFLAGS:+ $LDFLAGS}" ;;
+    esac
+  done
+
+  for incdir in \
+    "$HOMEBREW_PREFIX/opt/curl/include" \
+    "$HOMEBREW_PREFIX/opt/ffmpeg-full/include" \
+    "$HOMEBREW_PREFIX/opt/imagemagick-full/include"; do
+    case " ${CPPFLAGS-} " in
+      *" -I$incdir "*) ;;
+      *) CPPFLAGS="-I$incdir${CPPFLAGS:+ $CPPFLAGS}" ;;
+    esac
+  done
+
+  for pcdir in \
+    "$HOMEBREW_PREFIX/opt/ffmpeg-full/lib/pkgconfig" \
+    "$HOMEBREW_PREFIX/opt/imagemagick-full/lib/pkgconfig"; do
+    case ":${PKG_CONFIG_PATH-}:" in
+      *":$pcdir:"*) ;;
+      *) PKG_CONFIG_PATH="$pcdir${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}" ;;
+    esac
+  done
+
+  export LDFLAGS
+  export CPPFLAGS
+  export PKG_CONFIG_PATH
   export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$OPENSSL_PREFIX"
 fi
 

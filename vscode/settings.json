@@ -185,7 +185,7 @@
   },
   "github.copilot.completions.chat.enabled": false,
   "github.copilot.editor.enableCodeActions": false,
-  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
   "jupyter.allowUnauthorizedRemoteConnection": false,
   "chat.editing.confirmEditRequestRemoval": false,
   "workbench.colorTheme": "One Dark Pro",
@@ -199,5 +199,5 @@
   "workbench.editor.editorActionsLocation": "hidden",
   "chat.viewSessions.orientation": "stacked",
   "gitlens.ai.enabled": false,
-  "chat.tips.enabled": false,
+  "chat.tips.enabled": false
 }

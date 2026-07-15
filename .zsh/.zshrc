@@ -1,14 +1,6 @@
 export ZSHCONF_DIR="$HOME/dotfiles/.zsh"
 
-# 他の設定ファイルを読み込む（1path.zsh は後で読み込むため除外）
-if [ -d "$ZSHCONF_DIR" ]; then
-  for file in "$ZSHCONF_DIR"/*.zsh; do
-    [ "$(basename "$file")" = "1path.zsh" ] && continue
-    [ -r "$file" ] && source "$file"
-  done
-fi
-
-# OSごとの brew shellenv をまとめて初期化
+# OSごとの brew shellenv を先に初期化
 case "$(uname)" in
   Darwin)
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -18,6 +10,14 @@ case "$(uname)" in
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     ;;
 esac
+
+# 他の設定ファイルを読み込む（1path.zsh は後で読み込むため除外）
+if [ -d "$ZSHCONF_DIR" ]; then
+  for file in "$ZSHCONF_DIR"/*.zsh; do
+    [ "$(basename "$file")" = "1path.zsh" ] && continue
+    [ -r "$file" ] && source "$file"
+  done
+fi
 
 # brew が存在するときに補完を設定
 if type brew &>/dev/null; then

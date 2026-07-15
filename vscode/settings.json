@@ -1,0 +1,208 @@
+{
+  "editor.fontSize": 13,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.renderWhitespace": "all",
+  "editor.renderControlCharacters": true,
+  "editor.fontFamily": "UDEV Gothic 35NF",
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.wordSeparators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?　、。「」【】『』（）！？てにをはがのともへでや",
+  "editor.detectIndentation": true,
+  "textlint.languages": [
+    "markdown",
+    "latex",
+    "tex"
+  ],
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairsHorizontal": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.roundedSelection": true,
+  "editor.cursorBlinking": "phase",
+  "editor.minimap.size": "proportional",
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.scale": 1,
+  "editor.minimap.enabled": true,
+  "editor.minimap.autohide": "none",
+  "editor.inlineSuggest.enabled": true,
+  "terminal.integrated.fontSize": 18,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.prettier": "explicit"
+  },
+  "settingsSync.ignoredExtensions": [
+    "ms-vscode-remote.remote-wsl"
+  ],
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.parameterHints.enabled": true,
+  "explorer.compactFolders": false,
+  "workbench.startupEditor": "none",
+  "search.smartCase": true,
+  "latex-workshop.latex.autoBuild.run": "never",
+  "latex-workshop.view.pdf.zoom": "page-width",
+  "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+  "latex-workshop.message.latexlog.exclude": [
+    "(Font shape `(JY1|JT1|JY2|JT2)(/.*)(sl|it|sc)'.*|Some font shapes were not available.*)"
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk - LuaLaTeX",
+      "command": "latexmk",
+      "args": [
+        "-interaction=nonstopmode",
+        "-pdflua",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "latexmk - upLaTeX",
+      "command": "latexmk",
+      "args": [
+        "-e",
+        "$latex=q/uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode -file-line-error %S/",
+        "-e",
+        "$bibtex=q/upbibtex %O %B/",
+        "-e",
+        "$biber=q/biber %O --bblencoding=utf8 -u -U --output_safechars %B/",
+        "-e",
+        "$makeindex=q/upmendex %O -o %D %S/",
+        "-e",
+        "$dvipdf=q/dvipdfmx %O -o %D %S/",
+        "-norc",
+        "-gg",
+        "-pdfdvi",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk - LuaLaTeX",
+      "tools": [
+        "latexmk - LuaLaTeX"
+      ]
+    },
+    {
+      "name": "latexmk - upLaTeX",
+      "tools": [
+        "latexmk - upLaTeX"
+      ]
+    }
+  ],
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "latex-workshop.formatting.latexindent.args": [
+    "-c",
+    "%DIR%/",
+    "%TMPFILE%",
+    "-l",
+    "%DIR%/latexindent.yaml",
+    "-r"
+  ],
+  "latex-workshop.bibtex-format.align-equal.enabled": false,
+  "latex-workshop.bibtex-fields.order": [
+    "title",
+    "author",
+    "editor",
+    "year",
+    "journal",
+    "publisher",
+    "school",
+    "institution"
+  ],
+  "[bibtex]": {
+    "editor.wordWrap": "off",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.trimTrailingWhitespace": true
+  },
+  "latex-workshop.bibtex-format.trailingComma": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.autoImportCompletions": true,
+  "isort.interpreter": [
+    "${env:HOME}/.local/pipx/venvs/isort/bin/python"
+  ],
+  "isort.path": [
+    "${env:HOME}/.local/bin/isort"
+  ],
+  "isort.args": [
+    "--profile",
+    "black"
+  ],
+  "julia.symbolCacheDownload": true,
+  "julia.enableTelemetry": false,
+  "terminal.integrated.inheritEnv": true,
+  "[julia]": {
+    "editor.defaultFormatter": "julialang.language-julia"
+  },
+  "interactiveWindow.executeWithShiftEnter": true,
+  "jupyter.askForKernelRestart": false,
+  "jupyter.interactiveWindow.creationMode": "perFile",
+  "window.confirmSaveUntitledWorkspace": false,
+  "git.openRepositoryInParentFolders": "never",
+  "latex-workshop.formatting.latex": "latexindent",
+  "workbench.editorAssociations": {
+    "{git,gitlens}:/**/*.{md,csv,svg}": "default"
+  },
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "workbench.colorCustomizations": {
+    "terminal.background": "#00000000"
+  },
+  "workbench.settings.applyToAllProfiles": [
+    "workbench.colorCustomizations"
+  ],
+  "workbench.preferredDarkColorTheme": "One Dark Pro",
+  "oneDarkPro.bold": true,
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "application.shellEnvironmentResolutionTimeout": 120,
+  "terminal.integrated.commandsToSkipShell": [
+    "language-julia.interrupt"
+  ],
+  "workbench.iconTheme": "material-icon-theme",
+  "terminal.integrated.fontFamily": "UDEV Gothic  NFLG",
+  "terminal.integrated.fontLigatures.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+    "tex": false,
+    "latex": false
+  },
+  "jupyter.allowUnauthorizedRemoteConnection": true,
+  "chat.editing.confirmEditRequestRemoval": false,
+  "workbench.colorTheme": "One Dark Pro",
+  "diffEditor.codeLens": true,
+  "python.useEnvironmentsExtension": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python-envs.defaultEnvManager": "ms-python.python:venv",
+  "python-envs.alwaysUseUv": true,
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.editorActionsLocation": "hidden",
+  "chat.viewSessions.orientation": "stacked",
+  "gitlens.ai.model": "vscode",
+  "chat.tips.enabled": false,
+  "gitlens.ai.vscode.model": "copilot:gpt-4o-mini"
+}

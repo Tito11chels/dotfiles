@@ -78,3 +78,8 @@ eval "$(perl -I"$HOME/perl5/lib/perl5" -Mlocal::lib)"
 # その他の設定ファイルを読み込む
 CLICOLOR=1 # カラフルな出力を有効化
 export CLICOLOR
+
+# ユーザーが追加したzsh-functionsを読み込む
+export ZSH_FUNCTIONS_DIR="$ZSH_DIR/functions"
+export FPATH="$ZSH_FUNCTIONS_DIR:$FPATH"
+autoload -Uz setup-editor-settings

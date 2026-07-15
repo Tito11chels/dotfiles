@@ -1,0 +1,110 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the command
+// palette (cmd-shift-p / ctrl-shift-p)
+{
+  "proxy": "",
+  "use_system_window_tabs": true,
+  "bottom_dock_layout": "left_aligned",
+  "tabs": {
+    "close_position": "right",
+    "git_status": true
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": false,
+    "show_sign_in": false,
+    "show_branch_status_icon": false
+  },
+  "status_bar": {
+    "active_encoding_button": "enabled"
+  },
+  "markdown_preview_code_font_family": "UDEV Gothic 35NFLG",
+  "markdown_preview_font_family": "UDEV Gothic 35NFLG",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Modern Icons (Dark)"
+  },
+  "cli_default_open_behavior": "new_window",
+  "disable_ai": false,
+  "session": {
+    "trust_all_worktrees": false
+  },
+  "vim_mode": false,
+  "terminal": {
+    "copy_on_select": true,
+    "shell": "system",
+    "font_size": 18.0,
+    "font_family": "UDEV Gothic 35NFLG"
+  },
+  "project_panel": {
+    "bold_folder_labels": true,
+    "entry_spacing": "comfortable",
+    "hide_gitignore": false,
+    "dock": "left",
+    "auto_fold_dirs": false
+  },
+  "tab_bar": {
+    "show_tab_bar_buttons": false
+  },
+  "show_signature_help_after_edits": true,
+  "auto_signature_help": true,
+  "use_smartcase_search": true,
+  "minimap": {
+    "show": "always",
+    "thumb": "always"
+  },
+  "rounded_selection": true,
+  "cursor_blink": true,
+  "autosave": "on_focus_change",
+  "buffer_font_family": "UDEV Gothic 35NFLG",
+  "auto_indent_on_paste": true,
+  "use_on_type_format": true,
+  "show_whitespaces": "all",
+  "show_edit_predictions": true,
+  "ensure_final_newline_on_save": true,
+  "indent_guides": {
+    "enabled": true
+  },
+  "soft_wrap": "editor_width",
+  "tab_size": 2,
+  "base_keymap": "VSCode",
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+  "lsp": {
+    "texlab": {
+      "settings": {
+        "texlab": {
+          "build": {
+            "onSave": false,
+            "forwardSearchAfter": true,
+            "pdfDirectory": "./",
+            "auxDirectory": "auxiliary",
+            "executable": "latexmk",
+            "args": [
+              "-interaction=nonstopmode",
+              "-pdflua",
+              "-synctex=1",
+              "-auxdir=auxiliary",
+              "%f"
+            ],
+          },
+          "forwardSearch": {
+            "executable": "/Applications/Skim.app/Contents/SharedSupport/displayline",
+            "args": ["-g", "%l", "%p", "%f"],
+          },
+        },
+      },
+    },
+  }
+}

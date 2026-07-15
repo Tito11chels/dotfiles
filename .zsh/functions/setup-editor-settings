@@ -1,0 +1,64 @@
+# Set up Zed and VS Code to use settings tracked in this dotfiles repository.
+#
+# Existing settings are moved to a timestamped backup before the symlink is
+# created. Re-running this function is safe once the links are in place.
+setup-editor-settings() {
+  emulate -L zsh
+  setopt local_options no_nomatch
+
+  local dotfiles_dir="${DOT_DIR:-$HOME/dotfiles}"
+  local zed_source="$dotfiles_dir/zed/settings.json"
+  local vscode_source="$dotfiles_dir/vscode/settings.json"
+  local vscode_config_dir
+  local backup_suffix="$(date +%Y%m%d-%H%M%S)"
+  local source_file target backup i
+  local -a source_files target_files
+
+  case "$(uname -s)" in
+    Darwin)
+      vscode_config_dir="$HOME/Library/Application Support/Code/User"
+      ;;
+    Linux)
+      vscode_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/Code/User"
+      ;;
+    *)
+      print -u2 "Unsupported operating system: $(uname -s)"
+      return 1
+      ;;
+  esac
+
+  source_files=(
+    "$zed_source"
+    "$vscode_source"
+  )
+  target_files=(
+    "$HOME/.config/zed/settings.json"
+    "$vscode_config_dir/settings.json"
+  )
+
+  for i in {1..$#source_files}; do
+    source_file="${source_files[$i]}"
+    target="${target_files[$i]}"
+
+    if [[ ! -f "$source_file" ]]; then
+      print -u2 "Missing dotfiles setting: $source_file"
+      return 1
+    fi
+
+    mkdir -p -- "${target:h}" || return 1
+
+    if [[ -L "$target" && "$(readlink "$target")" == "$source_file" ]]; then
+      print "Already linked: $target"
+      continue
+    fi
+
+    if [[ -e "$target" || -L "$target" ]]; then
+      backup="${target}.backup-${backup_suffix}"
+      mv -- "$target" "$backup" || return 1
+      print "Backed up: $backup"
+    fi
+
+    ln -s "$source_file" "$target" || return 1
+    print "Linked: $target -> $source_file"
+  done
+}

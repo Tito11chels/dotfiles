@@ -7,7 +7,8 @@ if command -v nvim >/dev/null 2>&1; then
     alias vim="nvim"
 fi
 
-alias grep="rg --color=auto"
+# rgは標準のgrepと引数・終了コードが異なるため、grep自体は上書きしない。
+alias rgrep="rg --color=auto"
 
 alias tx="
     cp ~/latexconfig/.textlintrc.json ./.textlintrc.json

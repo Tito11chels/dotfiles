@@ -183,6 +183,9 @@
     "tex": false,
     "latex": false
   },
+  "github.copilot.completions.chat.enabled": false,
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.nextEditSuggestions.enabled": false,
   "jupyter.allowUnauthorizedRemoteConnection": false,
   "chat.editing.confirmEditRequestRemoval": false,
   "workbench.colorTheme": "One Dark Pro",
@@ -195,7 +198,6 @@
   "workbench.layoutControl.enabled": false,
   "workbench.editor.editorActionsLocation": "hidden",
   "chat.viewSessions.orientation": "stacked",
-  "gitlens.ai.model": "vscode",
+  "gitlens.ai.enabled": false,
   "chat.tips.enabled": false,
-  "gitlens.ai.vscode.model": "copilot:gpt-4o-mini"
 }

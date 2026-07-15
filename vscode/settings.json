@@ -190,7 +190,7 @@
     "tex": false,
     "latex": false
   },
-  "jupyter.allowUnauthorizedRemoteConnection": true,
+  "jupyter.allowUnauthorizedRemoteConnection": false,
   "chat.editing.confirmEditRequestRemoval": false,
   "workbench.colorTheme": "One Dark Pro",
   "diffEditor.codeLens": true,

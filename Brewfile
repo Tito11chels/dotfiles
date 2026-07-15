@@ -5,6 +5,7 @@ tap "mas-cli/tap" if OS.mac?
 brew "asdf"
 brew "bat"
 brew "curl"
+brew "fd"
 brew "fzf"
 brew "gh"
 brew "git"

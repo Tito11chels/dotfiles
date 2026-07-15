@@ -32,12 +32,24 @@ if [ -d "$ZSHCONF_DIR" ]; then
   done
 fi
 
-# brew が存在するときに補完を設定
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
+# Homebrewのcompletionをfpathへ追加
+typeset brew_prefix=""
+if (( $+commands[brew] )); then
+  brew_prefix="$(brew --prefix 2>/dev/null)"
+  if [[ -d "$brew_prefix/share/zsh/site-functions" ]]; then
+    fpath=("$brew_prefix/share/zsh/site-functions" $fpath)
+  fi
+fi
+
+# completionの初期化はfpathを確定させた後に一度だけ行う。
+autoload -Uz compinit
+typeset compdump="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/.zcompdump"
+if mkdir -p -- "${compdump:h}" 2>/dev/null; then
+  compinit -d "$compdump"
+else
   compinit
 fi
+unset compdump brew_prefix
 
 # PATH の優先順位を修正するため 1path.zsh を最後に読み込む
 if [ -r "$ZSHCONF_DIR/1path.zsh" ]; then

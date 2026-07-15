@@ -11,8 +11,21 @@ setup-editor-settings() {
   local vscode_source="$dotfiles_dir/vscode/settings.json"
   local vscode_config_dir
   local backup_suffix="$(date +%Y%m%d-%H%M%S)"
-  local source_file target backup i
+  local source_file target backup i dry_run=0
   local -a source_files target_files
+
+  case "${1-}" in
+    '') ;;
+    --dry-run) dry_run=1 ;;
+    -h|--help)
+      print 'usage: setup-editor-settings [--dry-run]'
+      return 0
+      ;;
+    *)
+      print -u2 "Unknown option: $1"
+      return 2
+      ;;
+  esac
 
   case "$(uname -s)" in
     Darwin)
@@ -45,8 +58,6 @@ setup-editor-settings() {
       return 1
     fi
 
-    mkdir -p -- "${target:h}" || return 1
-
     if [[ -L "$target" && "$(readlink "$target")" == "$source_file" ]]; then
       print "Already linked: $target"
       continue
@@ -54,10 +65,19 @@ setup-editor-settings() {
 
     if [[ -e "$target" || -L "$target" ]]; then
       backup="${target}.backup-${backup_suffix}"
+      if (( dry_run )); then
+        print "Would back up: $target -> $backup"
+        print "Would link: $target -> $source_file"
+        continue
+      fi
       mv -- "$target" "$backup" || return 1
       print "Backed up: $backup"
+    elif (( dry_run )); then
+      print "Would link: $target -> $source_file"
+      continue
     fi
 
+    mkdir -p -- "${target:h}" || return 1
     ln -s "$source_file" "$target" || return 1
     print "Linked: $target -> $source_file"
   done

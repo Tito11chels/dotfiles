@@ -31,3 +31,32 @@ open <Tab>
 ```
 
 入力途中の文字を残したまま候補を絞り込めます。`-` から始まる入力では、各コマンドの通常のオプション補完を優先します。その他のコマンドは既存のfzf-tab補完を使用します。
+
+## Homebrewとdoctor
+
+`Brewfile`は、CLIツール・macOSアプリ・フォント・Mac App Storeアプリをコメントで分類しています。インストールや更新を行う前に、まず確認だけ実行できます。
+
+```zsh
+brew-check
+brew-install                 # 確認のみ
+brew-install --apply         # Brewfileを実際に適用
+brew-update                  # outdatedの確認のみ
+brew-update --apply          # update / upgradeを実行
+brew-clean                   # cleanupのdry-run
+brew-clean --apply           # 古いHomebrewバージョンを削除
+```
+
+dotfilesの構文・JSON・依存・runtime管理をまとめて確認するには、次を実行します。インストールや削除は行いません。
+
+```zsh
+zsh scripts/dotfiles-doctor
+zsh scripts/dotfiles-doctor --brew  # Homebrew Bundleの読み取り専用確認も実行
+```
+
+エディタ設定のリンクを試すだけなら、`setup-editor-settings --dry-run`を使えます。
+
+## Python / uv
+
+uvの基本操作は[README_UV.md](README_UV.md)にまとめています。プロジェクト依存には`uv add` / `uv sync` / `uv run`、一度だけ使うCLIには`uvx`、常用CLIには`uv tool install`を使い分けます。
+
+秘密情報はリポジトリ内に置かず、GitHub CLIやmacOS Keychainなどの管理機能を優先してください。`.env`、`*.local`、credentialsディレクトリはGitの対象外にしていますが、既に追跡された秘密情報を自動削除するものではありません。

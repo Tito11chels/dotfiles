@@ -44,12 +44,22 @@ export FZF_CTRL_R_OPTS="
 "
 
 # ファイル検索の設定
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+if (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+elif (( $+commands[rg] )); then
+  export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+else
+  unset FZF_DEFAULT_COMMAND
+fi
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND-}"
+if (( $+commands[bat] )); then
+  export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+else
+  export FZF_CTRL_T_OPTS="--preview 'file --brief {}'"
+fi
 
 # ASDFの設定
 # append completions to fpath
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-# initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+if [[ -d "${ASDF_DATA_DIR:-$HOME/.asdf}/completions" ]]; then
+  fpath=("${ASDF_DATA_DIR:-$HOME/.asdf}/completions" $fpath)
+fi

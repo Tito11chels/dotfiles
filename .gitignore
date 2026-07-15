@@ -1,4 +1,10 @@
 *.DS_Store
+.env
+.env.*
+!.env.example
+*.local
+**/credentials/
+codex_proposal/
 .zsh/.zsh_history
 .zsh/.zcompdump
 .zsh/HOMEBREW_GITHUB_API_TOKEN.zsh

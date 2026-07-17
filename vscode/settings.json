@@ -1,5 +1,5 @@
 {
-  "editor.fontSize": 13,
+  "editor.fontSize": 14,
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.renderWhitespace": "all",
@@ -199,5 +199,6 @@
   "workbench.editor.editorActionsLocation": "hidden",
   "chat.viewSessions.orientation": "stacked",
   "gitlens.ai.enabled": false,
-  "chat.tips.enabled": false
+  "chat.tips.enabled": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }

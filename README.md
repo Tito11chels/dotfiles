@@ -40,6 +40,7 @@ open <Tab>
 brew-check
 brew-install                 # 確認のみ
 brew-install --apply         # Brewfileを実際に適用
+brewup                       # 確認後にupdate / upgradeを実行
 brew-update                  # outdatedの確認のみ
 brew-update --apply          # update / upgradeを実行
 brew-clean                   # cleanupのdry-run

@@ -147,5 +147,6 @@ brew-clean() {
     command brew cleanup
 }
 
-# 既存のbrewup名は残しつつ、upgrade/cleanupを自動実行しない。
-brewup() { brew-update "$@"; }
+# brewupは確認後に実際のformulae/cask更新を実行する。
+# 更新対象の確認だけを行う場合はbrew-updateを使う。
+brewup() { brew-update --apply; }

@@ -1,5 +1,5 @@
 {
-  "editor.fontSize": 13,
+  "editor.fontSize": 14,
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.renderWhitespace": "all",
@@ -12,8 +12,7 @@
   "editor.detectIndentation": true,
   "textlint.languages": [
     "markdown",
-    "latex",
-    "tex"
+    "latex"
   ],
   "editor.guides.bracketPairs": true,
   "editor.guides.indentation": true,
@@ -41,11 +40,11 @@
   "settingsSync.ignoredExtensions": [
     "ms-vscode-remote.remote-wsl"
   ],
-  "git.enableSmartCommit": true,
+  "git.enableSmartCommit": false,
   "git.autofetch": true,
-  "git.confirmSync": false,
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
+  "git.confirmSync": true,
+  "explorer.confirmDelete": true,
+  "explorer.confirmDragAndDrop": true,
   "editor.parameterHints.enabled": true,
   "explorer.compactFolders": false,
   "workbench.startupEditor": "none",
@@ -139,12 +138,6 @@
   },
   "python.analysis.typeCheckingMode": "standard",
   "python.analysis.autoImportCompletions": true,
-  "isort.interpreter": [
-    "${env:HOME}/.local/pipx/venvs/isort/bin/python"
-  ],
-  "isort.path": [
-    "${env:HOME}/.local/bin/isort"
-  ],
   "isort.args": [
     "--profile",
     "black"
@@ -180,7 +173,7 @@
     "language-julia.interrupt"
   ],
   "workbench.iconTheme": "material-icon-theme",
-  "terminal.integrated.fontFamily": "UDEV Gothic  NFLG",
+  "terminal.integrated.fontFamily": "UDEV Gothic 35NFLG",
   "terminal.integrated.fontLigatures.enabled": true,
   "github.copilot.enable": {
     "*": true,
@@ -190,7 +183,10 @@
     "tex": false,
     "latex": false
   },
-  "jupyter.allowUnauthorizedRemoteConnection": true,
+  "github.copilot.completions.chat.enabled": false,
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "jupyter.allowUnauthorizedRemoteConnection": false,
   "chat.editing.confirmEditRequestRemoval": false,
   "workbench.colorTheme": "One Dark Pro",
   "diffEditor.codeLens": true,
@@ -202,7 +198,7 @@
   "workbench.layoutControl.enabled": false,
   "workbench.editor.editorActionsLocation": "hidden",
   "chat.viewSessions.orientation": "stacked",
-  "gitlens.ai.model": "vscode",
+  "gitlens.ai.enabled": false,
   "chat.tips.enabled": false,
-  "gitlens.ai.vscode.model": "copilot:gpt-4o-mini"
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }

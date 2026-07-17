@@ -1,0 +1,124 @@
+#!/usr/bin/env zsh
+
+emulate -L zsh
+setopt pipefail
+
+typeset repo_root="${0:A:h:h}"
+typeset failures=0
+typeset warnings=0
+typeset file output rc manager check_brew=0
+
+case "${1-}" in
+  '') ;;
+  --brew) check_brew=1 ;;
+  -h|--help)
+    print 'usage: zsh scripts/dotfiles-doctor [--brew]'
+    print '  --brew  also run the read-only brew bundle check'
+    exit 0
+    ;;
+  *)
+    print -u2 "unknown option: $1"
+    exit 2
+    ;;
+esac
+
+ok() {
+  print "OK   $1"
+}
+
+warn() {
+  (( warnings++ ))
+  print "WARN $1"
+}
+
+fail() {
+  (( failures++ ))
+  print "FAIL $1"
+}
+
+print "dotfiles doctor: $repo_root"
+
+for file in "$repo_root/.zsh/.zshrc" "$repo_root"/.zsh/*.zsh; do
+  [[ -f "$file" ]] || continue
+  if zsh -n "$file" >/dev/null 2>&1; then
+    ok "zsh syntax: ${file#$repo_root/}"
+  else
+    fail "zsh syntax: ${file#$repo_root/}"
+  fi
+done
+
+if (( $+commands[jq] )); then
+  for file in "$repo_root/vscode/settings.json" "$repo_root/iterm_conf.json"; do
+    if jq empty "$file" >/dev/null 2>&1; then
+      ok "JSON: ${file#$repo_root/}"
+    else
+      fail "JSON: ${file#$repo_root/}"
+    fi
+  done
+else
+  warn 'jq is not installed; JSON checks were skipped'
+fi
+
+if git -C "$repo_root" diff --check; then
+  ok 'git diff --check'
+else
+  fail 'git diff --check'
+fi
+
+if (( check_brew && $+commands[brew] )); then
+  output="$(HOMEBREW_NO_AUTO_UPDATE=1 brew bundle check --file="$repo_root/Brewfile" --verbose 2>&1)"
+  rc=$?
+  if (( rc == 0 )); then
+    ok 'brew bundle check'
+  else
+    warn 'brew bundle has missing or changed entries (read-only check)'
+    print -r -- "$output" | sed -n '1,12p'
+  fi
+elif (( check_brew )); then
+  warn 'Homebrew is not installed or not on PATH'
+else
+  warn 'brew bundle check skipped (use: zsh scripts/dotfiles-doctor --brew)'
+fi
+
+if (( $+commands[uv] )); then
+  output="$(uv --version 2>/dev/null)"
+  ok "uv: $output"
+  file="$repo_root/.zsh/functions/uv.zsh"
+  if [[ -f "$file" ]]; then
+    if diff -q "$file" <(uv generate-shell-completion zsh 2>/dev/null) >/dev/null; then
+      ok 'uv zsh completion is current'
+    else
+      warn 'uv zsh completion is stale; regenerate with: uv generate-shell-completion zsh > .zsh/functions/uv.zsh'
+    fi
+  fi
+else
+  warn 'uv is not installed or not on PATH'
+fi
+
+for manager in asdf mise; do
+  if (( $+commands[$manager] )); then
+    ok "$manager: ${commands[$manager]}"
+  else
+    warn "$manager is not installed or not on PATH"
+  fi
+done
+
+if (( $+commands[asdf] && $+commands[mise] )); then
+  warn 'asdf and mise are both available; keep only one runtime manager active in PATH'
+fi
+
+if (( $+commands[rg] )); then
+  output="$(git -C "$repo_root" ls-files | rg -i '(^|/)(\.env|.*(secret|credential|token|password).*)' || true)"
+  if [[ -n "$output" ]]; then
+    warn "possible secret-like tracked files:\n$output"
+  else
+    ok 'no obvious secret-like tracked filenames'
+  fi
+fi
+
+if [[ -f "$repo_root/iterm_conf.json" ]] && rg -q '/Users/takumi' "$repo_root/iterm_conf.json"; then
+  warn 'iterm_conf.json contains a machine-specific /Users/takumi path'
+fi
+
+print "summary: $failures failure(s), $warnings warning(s)"
+(( failures == 0 ))

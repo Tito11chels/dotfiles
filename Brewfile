@@ -12,6 +12,7 @@ brew "gh"
 brew "git"
 brew "git-lfs"
 brew "gsl"
+brew "julia"
 brew "lsd"
 brew "lv"
 brew "mas" if OS.mac?

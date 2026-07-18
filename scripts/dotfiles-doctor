@@ -6,7 +6,8 @@ setopt pipefail
 typeset repo_root="${0:A:h:h}"
 typeset failures=0
 typeset warnings=0
-typeset file output rc manager check_brew=0
+typeset file output rc manager check_brew=0 julia_path julia_real julia_prefix julia_bindir
+typeset julia_version julia_minor kernel_file kernel_exec asdf_julia
 
 case "${1-}" in
   '') ;;
@@ -93,6 +94,90 @@ if (( $+commands[uv] )); then
   fi
 else
   warn 'uv is not installed or not on PATH'
+fi
+
+if (( $+commands[julia] )); then
+  julia_path="${commands[julia]}"
+  julia_real="${julia_path:A}"
+  ok "julia launcher: $julia_path"
+
+  output="$(julia --version 2>&1)"
+  rc=$?
+  if (( rc == 0 )); then
+    ok "$output"
+    julia_version="${output##* }"
+  else
+    fail 'julia --version failed'
+    print -r -- "$output" | sed -n '1,8p'
+  fi
+
+  output="$(julia --startup-file=no -e 'print(Sys.BINDIR)' 2>&1)"
+  rc=$?
+  if (( rc == 0 )); then
+    julia_bindir="${output:A}"
+    ok "Julia bindir: $julia_bindir"
+  else
+    fail 'Julia Sys.BINDIR check failed'
+    print -r -- "$output" | sed -n '1,8p'
+  fi
+
+  if (( $+commands[brew] )); then
+    julia_prefix="$(brew --prefix julia 2>/dev/null)"
+    [[ -n "$julia_prefix" ]] && julia_prefix="${julia_prefix:A}"
+    if [[ -n "$julia_prefix" && "$julia_bindir" == "$julia_prefix"/* ]]; then
+      ok 'Julia runtime is managed by Homebrew'
+    else
+      fail "Julia runtime is not from Homebrew: $julia_bindir"
+    fi
+
+    if brew list --formula juliaup >/dev/null 2>&1; then
+      fail 'Homebrew juliaup conflicts with julia'
+    else
+      ok 'Homebrew juliaup is not installed'
+    fi
+
+    output="$(HOMEBREW_NO_AUTO_UPDATE=1 brew outdated --formula julia 2>/dev/null)"
+    if [[ -n "$output" ]]; then
+      warn "Homebrew julia is outdated: $output"
+    else
+      ok 'Homebrew julia is current'
+    fi
+  fi
+
+  if (( $+commands[asdf] )); then
+    if asdf plugin list 2>/dev/null | rg -qx 'julia'; then
+      ok 'asdf Julia plugin is installed'
+      asdf_julia="$(asdf current julia 2>/dev/null)"
+      if print -r -- "$asdf_julia" | rg -q '^julia\s+system\s'; then
+        ok 'asdf Julia default: system (Homebrew passthrough)'
+      else
+        fail "asdf Julia default is not system: ${asdf_julia:-<unset>}"
+      fi
+    else
+      warn 'asdf Julia plugin is not installed; fixed Julia versions are unavailable'
+    fi
+  fi
+
+  if [[ -n "$julia_version" ]]; then
+    julia_minor="${julia_version%.*}"
+    kernel_file="$HOME/Library/Jupyter/kernels/julia-$julia_minor/kernel.json"
+    if [[ -f "$kernel_file" ]]; then
+      if (( $+commands[jq] )); then
+        kernel_exec="$(jq -r '.argv[0] // empty' "$kernel_file" 2>/dev/null)"
+        if [[ -n "$kernel_exec" && -x "$kernel_exec" ]]; then
+          ok "IJulia kernel executable: $kernel_exec"
+        else
+          fail "IJulia kernel executable is missing: ${kernel_exec:-<unset>}"
+        fi
+      else
+        warn 'jq is not installed; IJulia kernelspec executable check was skipped'
+      fi
+    else
+      warn "IJulia kernelspec not found for Julia $julia_minor"
+    fi
+  fi
+else
+  warn 'Julia is not installed or not on PATH'
 fi
 
 for manager in asdf mise; do

@@ -60,6 +60,53 @@ zsh scripts/dotfiles-doctor --brew  # Homebrew Bundleの読み取り専用確認
 
 エディタ設定のリンクを試すだけなら、`setup-editor-settings --dry-run`を使えます。
 
+## Julia / asdf
+
+通常はHomebrewの`julia` formulaを使い、`brewup`で常にHomebrew上の最新安定版へ更新します。Juliaupは併用しません。
+
+asdfのshimsがHomebrewよりPATHの前にあるため、ホームの`.tool-versions`では`julia system`を指定します。asdfの`system`はshimからHomebrewのJuliaへ処理を渡します。
+
+```zsh
+asdf set -u julia system
+brewup
+julia --version
+```
+
+`brewup`でHomebrew Juliaの実体が変わった場合、共有環境にIJuliaがあればkernelspecも自動的に再生成します。手動で再生成する場合は`julia-refresh-ijulia`を使えます。
+
+VS CodeはPATH上のJuliaを自動検出するため、バージョン固有の`julia.executablePath`は設定していません。
+
+パッケージは作業ディレクトリごとの`Project.toml` / `Manifest.toml`で管理します。プロジェクトを使うときは、対象ディレクトリで次を実行します。
+
+```zsh
+julia --project=.
+```
+
+初回はJuliaのPkg REPLで環境を再現します。
+
+```julia
+pkg> instantiate
+```
+
+特定バージョンが必要なプロジェクトだけasdfを使います。Julia pluginはURLを明示して追加し、対象プロジェクト内の`.tool-versions`へバージョンを保存します。
+
+```zsh
+asdf plugin add julia https://github.com/rkyleg/asdf-julia.git
+asdf install julia 1.11.7
+cd path/to/project
+asdf set julia 1.11.7
+julia --version
+julia --project=.
+```
+
+プロジェクトを指定しない場合はJuliaの共有環境`@v#.#`が使われます。`JULIA_PROJECT`、`JULIA_LOAD_PATH`、`JULIA_DEPOT_PATH`、thread数はグローバルに固定していません。
+
+Homebrew更新後にIJuliaカーネルが起動しない場合は、IJulia内ではなくterminalから再生成します。
+
+```zsh
+julia-refresh-ijulia
+```
+
 ## Python / uv
 
 uvの基本操作は[README_UV.md](README_UV.md)にまとめています。プロジェクト依存には`uv add` / `uv sync` / `uv run`、一度だけ使うCLIには`uvx`、常用CLIには`uv tool install`を使い分けます。

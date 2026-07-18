@@ -125,15 +125,56 @@ brew-install() {
     command brew bundle install --file="$brewfile"
 }
 
+julia-refresh-ijulia() {
+    emulate -L zsh
+    local julia_exe
+
+    if ! command brew list --formula julia >/dev/null 2>&1; then
+        print -u2 'julia-refresh-ijulia: Homebrew julia is not installed'
+        return 1
+    fi
+
+    julia_exe="$(command brew --prefix julia)/bin/julia"
+    if [[ ! -x "$julia_exe" ]]; then
+        print -u2 "julia-refresh-ijulia: executable not found: $julia_exe"
+        return 1
+    fi
+
+    "$julia_exe" -e '
+        using Pkg
+        if haskey(Pkg.project().dependencies, "IJulia")
+            Pkg.build("IJulia")
+        else
+            println("IJulia is not installed in ", Base.active_project(), "; skipping kernelspec rebuild")
+        end
+    '
+}
+
 brew-update() {
     emulate -L zsh
+    local julia_before='' julia_after='' julia_exe
     if [[ ${1-} != '--apply' ]]; then
         print "Dry run only. Use 'brew-update --apply' to update formulae and casks."
         command brew outdated
         return $?
     fi
     _dotfiles_confirm 'Run brew update and brew upgrade?' || return 1
-    command brew update && command brew upgrade
+
+    if command brew list --formula julia >/dev/null 2>&1; then
+        julia_exe="$(command brew --prefix julia)/bin/julia"
+        [[ -e "$julia_exe" ]] && julia_before="${julia_exe:A}"
+    fi
+
+    command brew update && command brew upgrade || return $?
+
+    if command brew list --formula julia >/dev/null 2>&1; then
+        julia_exe="$(command brew --prefix julia)/bin/julia"
+        [[ -e "$julia_exe" ]] && julia_after="${julia_exe:A}"
+    fi
+
+    if [[ -n "$julia_after" && "$julia_after" != "$julia_before" ]]; then
+        julia-refresh-ijulia || print -u2 'WARN Julia was updated, but the IJulia kernelspec refresh failed'
+    fi
 }
 
 brew-clean() {

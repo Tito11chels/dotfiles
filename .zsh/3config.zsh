@@ -9,6 +9,12 @@ export SAVEHIST=50000
 export SHELDON_CONFIG_DIR="$HOME/dotfiles/.sheldon"
 export SHELDON_DATA_DIR="$HOME/dotfiles/.sheldon"
 
+# 自己更新するcask（auto_updates true）はbrew upgradeの対象から除外する。
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+
+# install / upgrade / reinstallでHomebrew本体の確認プロンプトを省略する。
+export HOMEBREW_NO_ASK=1
+
 # Homebrew があればプレフィックスを一度だけ取得し、各種フラグに利用
 if (( $+commands[brew] )); then
   HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"

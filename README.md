@@ -47,6 +47,10 @@ brew-clean                   # cleanupのdry-run
 brew-clean --apply           # 古いHomebrewバージョンを削除
 ```
 
+`HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1`を設定しているため、通常の`brew upgrade`と`brewup`は`auto_updates true`のcaskを更新しません。formulaと、それ以外の更新可能なcaskは従来どおり対象になります。`--greedy`または`--greedy-auto-updates`を明示した場合は、この除外設定よりコマンドラインオプションが優先されます。
+
+`HOMEBREW_NO_ASK=1`も設定しているため、Homebrew本体は`install`、`upgrade`、`reinstall`で確認プロンプトを表示しません。`brewup`と`brew-install --apply`にはdotfiles側の事前確認が引き続きありますが、通常の`brew upgrade`などを直接実行した場合は確認なしで処理が始まります。一時的に確認を戻す場合は`brew upgrade --ask`のように`--ask`を明示してください。
+
 dotfilesの構文・JSON・依存・runtime管理をまとめて確認するには、次を実行します。インストールや削除は行いません。
 
 ```zsh

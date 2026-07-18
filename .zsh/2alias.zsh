@@ -148,5 +148,6 @@ brew-clean() {
 }
 
 # brewupは確認後に実際のformulae/cask更新を実行する。
+# auto_updates trueのcaskはHOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKSにより除外される。
 # 更新対象の確認だけを行う場合はbrew-updateを使う。
 brewup() { brew-update --apply; }

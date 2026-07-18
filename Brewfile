@@ -17,6 +17,7 @@ brew "lsd"
 brew "lv"
 brew "mas" if OS.mac?
 brew "fastfetch"
+brew "python"
 brew "pipx"
 brew "ripgrep"
 brew "sheldon"

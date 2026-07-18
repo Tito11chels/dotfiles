@@ -150,9 +150,53 @@ julia-refresh-ijulia() {
     '
 }
 
+pipx-reinstall-all() {
+    emulate -L zsh
+    local python_exe="${PIPX_DEFAULT_PYTHON:-${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python/libexec/bin/python}"
+
+    if ! (( $+commands[pipx] )); then
+        print -u2 'pipx-reinstall-all: pipx is not installed or not on PATH'
+        return 1
+    fi
+    if [[ ! -x "$python_exe" ]]; then
+        print -u2 "pipx-reinstall-all: Homebrew Python not found: $python_exe"
+        return 1
+    fi
+
+    command pipx reinstall-all \
+      --python "$python_exe" \
+      --fetch-python=never \
+      --backend=uv
+}
+
+mason-refresh-python-tools() {
+    emulate -L zsh
+    setopt extendedglob
+    local mason_packages_dir="$HOME/.local/share/nvim/mason/packages"
+    local receipt package
+    local -a packages=()
+
+    if ! (( $+commands[nvim] && $+commands[jq] )); then
+        print -u2 'mason-refresh-python-tools: nvim and jq are required'
+        return 1
+    fi
+    [[ -d "$mason_packages_dir" ]] || return 0
+
+    for receipt in "$mason_packages_dir"/*/mason-receipt.json(N); do
+        jq -e '.source.id // "" | startswith("pkg:pypi/")' "$receipt" >/dev/null 2>&1 || continue
+        package="${receipt:h:t}"
+        [[ "$package" == [A-Za-z0-9._-]## ]] || continue
+        packages+=("$package")
+    done
+
+    (( $#packages > 0 )) || return 0
+    NVIM_LOG_FILE=/dev/null command nvim --headless "+MasonInstall --force ${(j: :)packages}" +qa
+}
+
 brew-update() {
     emulate -L zsh
     local julia_before='' julia_after='' julia_exe
+    local python_before='' python_after='' python_exe
     if [[ ${1-} != '--apply' ]]; then
         print "Dry run only. Use 'brew-update --apply' to update formulae and casks."
         command brew outdated
@@ -165,6 +209,9 @@ brew-update() {
         [[ -e "$julia_exe" ]] && julia_before="${julia_exe:A}"
     fi
 
+    python_exe="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python/libexec/bin/python"
+    [[ -e "$python_exe" ]] && python_before="${python_exe:A}"
+
     command brew update && command brew upgrade || return $?
 
     if command brew list --formula julia >/dev/null 2>&1; then
@@ -174,6 +221,12 @@ brew-update() {
 
     if [[ -n "$julia_after" && "$julia_after" != "$julia_before" ]]; then
         julia-refresh-ijulia || print -u2 'WARN Julia was updated, but the IJulia kernelspec refresh failed'
+    fi
+
+    [[ -e "$python_exe" ]] && python_after="${python_exe:A}"
+    if [[ -n "$python_after" && "$python_after" != "$python_before" ]]; then
+        pipx-reinstall-all || print -u2 'WARN Python was updated, but pipx environments could not be rebuilt'
+        mason-refresh-python-tools || print -u2 'WARN Python was updated, but Mason Python tools could not be rebuilt'
     fi
 }
 

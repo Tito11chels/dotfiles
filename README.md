@@ -107,8 +107,43 @@ Homebrew更新後にIJuliaカーネルが起動しない場合は、IJulia内で
 julia-refresh-ijulia
 ```
 
-## Python / uv
+## Python / asdf / uv / pipx
 
-uvの基本操作は[README_UV.md](README_UV.md)にまとめています。プロジェクト依存には`uv add` / `uv sync` / `uv run`、一度だけ使うCLIには`uvx`、常用CLIには`uv tool install`を使い分けます。
+通常のPythonはHomebrewの最新安定版を使います。asdfのホーム設定は`python system`とし、固定版のasdf shimが存在する場合もHomebrew Pythonへ処理を渡します。asdf Pythonが1つも導入されていない間はshimが作られないため、Homebrew PythonがPATHから直接選ばれます。特定バージョンが必要なプロジェクトだけ、プロジェクト内の`.tool-versions`でasdf Pythonを固定します。
+
+```zsh
+asdf set -u python system
+python --version
+asdf current python
+```
+
+役割は次のように分けます。
+
+- Homebrew: 通常使う最新Python、asdf、uv、pipx本体
+- asdf: 特定プロジェクトだけPython本体を固定
+- uv: `pyproject.toml`、`uv.lock`、`.venv`によるプロジェクト依存管理
+- pipx: PoetryやBlackなど、どこからでも使うPython製CLI
+
+Homebrew Python本体へ`pip install`でパッケージを追加しません。解析用のpandasやmatplotlibも、普段使い用またはプロジェクト用のuv環境へ入れます。
+
+普段使い用には`~/Developer/python-lab`を作成済みです。現在は空の環境なので、必要になったパッケージだけ後から追加します。
+
+```zsh
+cd ~/Developer/python-lab
+uv add pandas matplotlib numpy scipy seaborn ipython
+uv run ipython
+```
+
+常用CLIの宣言は`pipx-tools.txt`です。同期はまず確認だけ行い、必要なときだけ適用します。
+
+```zsh
+zsh scripts/pipx-sync
+zsh scripts/pipx-sync --apply
+pipx list
+```
+
+Homebrew更新でPythonの実体が変わった場合、`brewup`は既存pipx環境とNeovim MasonのPython製ツールを新しいHomebrew Pythonで再構築します。手動実行は`pipx-reinstall-all`と`mason-refresh-python-tools`です。
+
+uvのプロジェクト操作と固定版の例は[README_UV.md](README_UV.md)にまとめています。
 
 秘密情報はリポジトリ内に置かず、GitHub CLIやmacOS Keychainなどの管理機能を優先してください。`.env`、`*.local`、credentialsディレクトリはGitの対象外にしていますが、既に追跡された秘密情報を自動削除するものではありません。

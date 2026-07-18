@@ -22,6 +22,18 @@ if (( $+commands[brew] )); then
   if [[ -n "$HOMEBREW_PREFIX" ]]; then
     export HOMEBREW_PREFIX
 
+    # Python本体はHomebrew/asdf、常用CLIはpipx、プロジェクト依存はuvで管理する。
+    # pipxが独自Pythonを取得しないよう、Homebrewの安定したopt symlinkを明示する。
+    if [[ -x "$HOMEBREW_PREFIX/opt/python/libexec/bin/python" ]]; then
+      export PIPX_DEFAULT_PYTHON="$HOMEBREW_PREFIX/opt/python/libexec/bin/python"
+      export PIPX_DEFAULT_BACKEND=uv
+      export PIPX_FETCH_PYTHON=never
+    fi
+
+    # uvはasdf shimやHomebrew Pythonを優先する。既存の.python-versionとの
+    # 互換性を保つため、uv-managed Python自体は禁止しない。
+    export UV_PYTHON_PREFERENCE=system
+
     # keg-only formulaを含めたビルド系フラグは、実在するディレクトリだけ追加する。
     for libdir in \
       "$HOMEBREW_PREFIX/opt/curl/lib" \

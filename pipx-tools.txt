@@ -1,0 +1,6 @@
+# package spec   pipx environment name
+black[d]         black
+flake8           flake8
+isort            isort
+pip-review       pip-review
+poetry           poetry

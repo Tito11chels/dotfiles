@@ -1,7 +1,8 @@
 # uv 簡単ガイド
 
-このdotfilesでは、Pythonのプロジェクト管理とCLIツールの実行に`uv`を使う想定です。
-`Brewfile`にも`uv`を宣言しています。
+このdotfilesでは、Pythonプロジェクトの依存と仮想環境を`uv`で管理します。
+通常のPythonはHomebrew、固定版Pythonはasdf、常用CLIはpipxの担当です。
+`Brewfile`にはPython、asdf、uv、pipxを宣言しています。
 
 ## まず使う
 
@@ -20,6 +21,8 @@ uv run python --version
 ```
 
 `uv run`はプロジェクトの依存関係と`.venv`を使って実行するため、プロジェクト作業では`uvx`よりこちらを優先します。
+
+普段の試行・解析には、Homebrew Pythonで初期化した`~/Developer/python-lab`を使えます。依存はまだ空で、必要なものを後から`uv add`します。
 
 ## プロジェクトを作る・依存を管理する
 
@@ -55,28 +58,27 @@ uvx ruff@latest check .
 uvx --from httpie http --version
 ```
 
-頻繁に使うツールは、ユーザー用の隔離環境へインストールします。
+頻繁に使うツールはpipxでユーザー用の隔離環境へインストールします。常用ツールは`pipx-tools.txt`へ宣言してから同期します。
 
 ```zsh
-uv tool install ruff
-uv tool list
-uv tool upgrade --all
-uv tool uninstall ruff
-uv tool update-shell
+zsh scripts/pipx-sync
+zsh scripts/pipx-sync --apply
+pipx list
 ```
 
-プロジェクトの依存関係を見せたいテストやlintには`uv run`、独立したCLIを一時実行するには`uvx`、常用CLIをPATHへ出すには`uv tool install`、という使い分けです。
+プロジェクトの依存関係を見せたいテストやlintには`uv run`、独立したCLIを一時実行するには`uvx`、常用CLIをPATHへ出すにはpipx、という使い分けです。`uv tool install`とpipxは役割が重複するため、このdotfilesではpipxへ統一します。
 
-## Pythonを管理する
+## Python本体を管理する
 
 ```zsh
-uv python list
-uv python install 3.12
-uv python pin 3.12
-uv run python --version
+asdf set -u python system       # 通常時はHomebrew Python
+asdf install python 3.12.10     # 固定版を用意
+cd path/to/project
+asdf set python 3.12.10         # .tool-versionsへ記録
+uv sync                         # 選択されたPythonで.venvを作る
 ```
 
-Pythonの自動ダウンロードを避けたい場合は、必要に応じて`--no-python-downloads`を使います。
+`pyproject.toml`には互換範囲を`requires-python`で記録し、正確なランタイムは`.tool-versions`で固定します。uvはasdf shimやHomebrew Pythonを優先しますが、既存の`.python-version`との互換性のためuv-managed Python自体は禁止していません。新規プロジェクトでは`uv python pin`を使わず、asdfへ統一します。
 
 ## Zsh補完を更新する
 
@@ -100,8 +102,9 @@ zsh scripts/dotfiles-doctor
 | プロジェクト依存を追加 | `uv add PACKAGE` |
 | プロジェクト内で実行 | `uv run COMMAND` |
 | CLIを一度だけ実行 | `uvx COMMAND` |
-| CLIを常用インストール | `uv tool install PACKAGE` |
-| Pythonを用意 | `uv python install VERSION` |
+| CLIを常用インストール | `pipx-tools.txt` + `scripts/pipx-sync` |
+| 通常のPythonを更新 | `brewup` |
+| 固定版Pythonを用意 | `asdf install python VERSION` |
 
 公式ドキュメント:
 

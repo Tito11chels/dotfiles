@@ -1,0 +1,71 @@
+#!/usr/bin/env zsh
+
+emulate -L zsh
+setopt pipefail
+
+typeset repo_root="${0:A:h:h}"
+typeset manifest="$repo_root/pipx-tools.txt"
+typeset apply=0 spec name extra python_exe installed_json
+
+case "${1-}" in
+  '') ;;
+  --apply) apply=1 ;;
+  -h|--help)
+    print 'usage: zsh scripts/pipx-sync [--apply]'
+    print '  without --apply, only show the declared pipx operations'
+    exit 0
+    ;;
+  *)
+    print -u2 "unknown option: $1"
+    exit 2
+    ;;
+esac
+
+if ! (( $+commands[pipx] )); then
+  print -u2 'pipx is not installed or not on PATH'
+  exit 1
+fi
+
+python_exe="${PIPX_DEFAULT_PYTHON:-${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python/libexec/bin/python}"
+if [[ ! -x "$python_exe" ]]; then
+  print -u2 "Homebrew Python not found: $python_exe"
+  exit 1
+fi
+
+if (( ! apply )); then
+  print "Dry run only. Use 'zsh scripts/pipx-sync --apply' to install or upgrade:"
+fi
+
+while read -r spec name extra; do
+  [[ -z "$spec" || "$spec" == \#* ]] && continue
+  if [[ -z "$name" || -n "$extra" ]]; then
+    print -u2 "invalid manifest line: $spec $name $extra"
+    exit 1
+  fi
+
+  if (( apply )); then
+    print "Syncing $name from $spec"
+    command pipx install \
+      --upgrade \
+      --python "$python_exe" \
+      --fetch-python=never \
+      --backend=uv \
+      "$spec" || exit $?
+  else
+    print "  $name <- $spec"
+  fi
+done < "$manifest"
+
+if (( apply )); then
+  installed_json="$(command pipx list --json)" || exit $?
+  if (( $+commands[jq] )); then
+    while read -r spec name extra; do
+      [[ -z "$spec" || "$spec" == \#* ]] && continue
+      print -r -- "$installed_json" | jq -e --arg name "$name" '.venvs[$name]' >/dev/null || {
+        print -u2 "pipx environment is missing after sync: $name"
+        exit 1
+      }
+    done < "$manifest"
+  fi
+  print 'pipx tools are synchronized.'
+fi

@@ -11,6 +11,7 @@ if [[ -n "${ZSH_VERSION-}" ]]; then
   original_path=("${path[@]}")
   requested_path=(
     "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+    "$brew_prefix/opt/python/libexec/bin"
     "$brew_prefix/opt/imagemagick-full/bin"
     "$brew_prefix/opt/ffmpeg-full/bin"
     "$brew_prefix/bin"
@@ -25,7 +26,7 @@ if [[ -n "${ZSH_VERSION-}" ]]; then
 
   # Build PATH in the desired priority order.
   # - asdf shims first
-  # - Homebrew next (including opt/curl)
+  # - Homebrew next (including unversioned Python commands and opt/curl)
   # - user/rust tooling
   # - finally whatever PATH already had (system paths, etc.)
   path=()
@@ -37,5 +38,5 @@ if [[ -n "${ZSH_VERSION-}" ]]; then
   unset brew_prefix original_path requested_path dir
 else
   # Fallback for non-zsh shells (best-effort, may not be fully idempotent)
-  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/imagemagick-full/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/ffmpeg-full/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/sbin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/rustup/bin:$PATH"
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python/libexec/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/imagemagick-full/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/ffmpeg-full/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/sbin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:${HOMEBREW_PREFIX:-/opt/homebrew}/opt/rustup/bin:$PATH"
 fi

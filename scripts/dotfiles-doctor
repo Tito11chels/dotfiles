@@ -8,6 +8,11 @@ typeset failures=0
 typeset warnings=0
 typeset file output rc manager check_brew=0 julia_path julia_real julia_prefix julia_bindir
 typeset julia_version julia_minor kernel_file kernel_exec asdf_julia
+typeset python_path python_exe python_real python_prefix asdf_python expected_python
+typeset expected_python_real expected_python_version pipx_json pipx_spec pipx_name pipx_extra
+typeset pipx_backend pipx_source_python pipx_package_spec pipx_app pipx_venv_python
+typeset pipx_base_python pipx_venv_version pipx_valid first_line interpreter
+typeset mason_receipt mason_package mason_python
 
 case "${1-}" in
   '') ;;
@@ -94,6 +99,155 @@ if (( $+commands[uv] )); then
   fi
 else
   warn 'uv is not installed or not on PATH'
+fi
+
+if (( $+commands[python] )); then
+  python_path="${commands[python]}"
+  output="$(python --version 2>&1)"
+  rc=$?
+  if (( rc == 0 )); then
+    ok "python launcher: $python_path ($output)"
+  else
+    fail 'python --version failed'
+  fi
+
+  python_exe="$(python -c 'import sys; print(sys.executable)' 2>/dev/null)"
+  python_real="${python_exe:A}"
+  if (( $+commands[brew] )); then
+    python_prefix="$(brew --prefix python 2>/dev/null)"
+    [[ -n "$python_prefix" ]] && python_prefix="${python_prefix:A}"
+    if [[ -n "$python_prefix" && "$python_real" == "$python_prefix"/* ]]; then
+      ok "Python runtime is managed by Homebrew: $python_exe"
+    else
+      fail "Python runtime is not from Homebrew: ${python_exe:-<unknown>}"
+    fi
+  fi
+
+  if (( $+commands[asdf] )) && asdf plugin list 2>/dev/null | rg -qx 'python'; then
+    asdf_python="$(asdf current python 2>/dev/null)"
+    if print -r -- "$asdf_python" | rg -q '^python\s+system\s'; then
+      ok 'asdf Python default: system (Homebrew passthrough)'
+    else
+      fail "asdf Python default is not system: ${asdf_python:-<unset>}"
+    fi
+  else
+    warn 'asdf Python plugin is not installed; fixed Python versions are unavailable'
+  fi
+else
+  fail 'python is not installed or not on PATH'
+fi
+
+if (( $+commands[pipx] )); then
+  expected_python="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python/libexec/bin/python"
+  expected_python_real="${expected_python:A}"
+  expected_python_version="$("$expected_python" --version 2>&1)"
+  if [[ -x "$expected_python" && "${PIPX_DEFAULT_PYTHON-}" == "$expected_python" ]]; then
+    ok "pipx default Python: $PIPX_DEFAULT_PYTHON"
+  else
+    fail "pipx default Python is not Homebrew Python: ${PIPX_DEFAULT_PYTHON:-<unset>}"
+  fi
+  [[ "${PIPX_DEFAULT_BACKEND-}" == uv ]] \
+    && ok 'pipx backend: uv' \
+    || fail "pipx backend is not uv: ${PIPX_DEFAULT_BACKEND:-<unset>}"
+  [[ "${PIPX_FETCH_PYTHON-}" == never ]] \
+    && ok 'pipx standalone Python downloads: disabled' \
+    || fail "pipx standalone Python downloads are not disabled: ${PIPX_FETCH_PYTHON:-<unset>}"
+
+  if [[ -f "$repo_root/pipx-tools.txt" ]]; then
+    if ! (( $+commands[jq] )); then
+      fail 'jq is required to inspect pipx environments'
+    else
+      pipx_json="$(command pipx list --json 2>&1)"
+      rc=$?
+      if (( rc != 0 )) || ! print -r -- "$pipx_json" | jq empty >/dev/null 2>&1; then
+        fail 'pipx list --json failed'
+        print -r -- "$pipx_json" | sed -n '1,8p'
+      else
+        while read -r pipx_spec pipx_name pipx_extra; do
+          [[ -z "$pipx_spec" || "$pipx_spec" == \#* ]] && continue
+          if [[ -z "$pipx_name" || -n "$pipx_extra" ]]; then
+            fail "invalid pipx-tools.txt line: $pipx_spec $pipx_name $pipx_extra"
+            continue
+          fi
+
+          if ! print -r -- "$pipx_json" | jq -e --arg name "$pipx_name" '.venvs[$name]' >/dev/null 2>&1; then
+            fail "pipx environment is missing: $pipx_name"
+            continue
+          fi
+
+          pipx_valid=1
+          pipx_backend="$(print -r -- "$pipx_json" | jq -r --arg name "$pipx_name" '.venvs[$name].metadata.backend // empty')"
+          pipx_source_python="$(print -r -- "$pipx_json" | jq -r --arg name "$pipx_name" '.venvs[$name].metadata.source_interpreter.__Path__ // empty')"
+          pipx_package_spec="$(print -r -- "$pipx_json" | jq -r --arg name "$pipx_name" '.venvs[$name].metadata.main_package.package_or_url // empty')"
+          pipx_app="$(print -r -- "$pipx_json" | jq -r --arg name "$pipx_name" '.venvs[$name].metadata.main_package.app_paths[0].__Path__ // empty')"
+
+          if [[ "$pipx_backend" != uv ]]; then
+            fail "pipx backend is not uv for $pipx_name: ${pipx_backend:-<unset>}"
+            pipx_valid=0
+          fi
+          if [[ "$pipx_source_python" != "$expected_python" ]]; then
+            fail "pipx source Python is not Homebrew Python for $pipx_name: ${pipx_source_python:-<unset>}"
+            pipx_valid=0
+          fi
+          if [[ "$pipx_package_spec" != "$pipx_spec" ]]; then
+            fail "pipx package spec differs for $pipx_name: ${pipx_package_spec:-<unset>}"
+            pipx_valid=0
+          fi
+
+          if [[ -z "$pipx_app" ]]; then
+            fail "pipx app is missing for $pipx_name"
+            pipx_valid=0
+          else
+            pipx_venv_python="${pipx_app:h}/python"
+            pipx_base_python="$("$pipx_venv_python" -c 'import sys; print(sys._base_executable)' 2>/dev/null)"
+            rc=$?
+            pipx_venv_version="$("$pipx_venv_python" --version 2>/dev/null)"
+            if (( rc != 0 )) || [[ -z "$pipx_base_python" || -z "$pipx_venv_version" ]]; then
+              fail "pipx environment is broken: $pipx_name"
+              pipx_valid=0
+            elif [[ "${pipx_base_python:A}" != "$expected_python_real" ]]; then
+              fail "pipx runtime is not current Homebrew Python for $pipx_name: $pipx_base_python"
+              pipx_valid=0
+            elif [[ "$pipx_venv_version" != "$expected_python_version" ]]; then
+              fail "pipx Python version differs for $pipx_name: $pipx_venv_version"
+              pipx_valid=0
+            fi
+          fi
+
+          (( pipx_valid )) && ok "pipx environment: $pipx_name ($pipx_backend, $pipx_venv_version)"
+        done < "$repo_root/pipx-tools.txt"
+      fi
+    fi
+  else
+    fail 'pipx-tools.txt is missing'
+  fi
+else
+  fail 'pipx is not installed or not on PATH'
+fi
+
+if [[ -d "$HOME/.local/bin" ]]; then
+  while IFS= read -r file; do
+    first_line="$(head -n 1 "$file" 2>/dev/null)"
+    [[ "$first_line" == '#!'/* ]] || continue
+    interpreter="${first_line#\#!}"
+    interpreter="${interpreter%% *}"
+    if [[ ! -x "$interpreter" ]]; then
+      warn "stale user command: ${file:t} -> $interpreter"
+    fi
+  done < <(find "$HOME/.local/bin" -maxdepth 1 -type f -perm -u+x -print 2>/dev/null)
+fi
+
+if (( $+commands[jq] )) && [[ -d "$HOME/.local/share/nvim/mason/packages" ]]; then
+  for mason_receipt in "$HOME/.local/share/nvim/mason/packages"/*/mason-receipt.json(N); do
+    jq -e '.source.id // "" | startswith("pkg:pypi/")' "$mason_receipt" >/dev/null 2>&1 || continue
+    mason_package="${mason_receipt:h:t}"
+    mason_python="${mason_receipt:h}/venv/bin/python"
+    if [[ -x "$mason_python" ]] && "$mason_python" --version >/dev/null 2>&1; then
+      ok "Mason Python environment: $mason_package"
+    else
+      fail "Mason Python environment is broken: $mason_package"
+    fi
+  done
 fi
 
 if (( $+commands[julia] )); then

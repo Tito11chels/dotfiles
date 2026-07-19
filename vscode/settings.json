@@ -43,7 +43,7 @@
   "git.enableSmartCommit": false,
   "git.autofetch": true,
   "git.confirmSync": true,
-  "explorer.confirmDelete": true,
+  "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": true,
   "editor.parameterHints.enabled": true,
   "explorer.compactFolders": false,
@@ -138,6 +138,8 @@
   },
   "python.analysis.typeCheckingMode": "standard",
   "python.analysis.autoImportCompletions": true,
+  "black-formatter.importStrategy": "fromEnvironment",
+  "isort.importStrategy": "fromEnvironment",
   "isort.args": [
     "--profile",
     "black"
@@ -173,8 +175,8 @@
     "language-julia.interrupt"
   ],
   "workbench.iconTheme": "material-icon-theme",
-  "terminal.integrated.fontFamily": "UDEV Gothic 35NFLG",
-  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.fontFamily": "MesloLGL Nerd Font Mono",
+  "terminal.integrated.fontLigatures.enabled": false,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -194,6 +196,8 @@
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
   "python-envs.defaultEnvManager": "ms-python.python:venv",
   "python-envs.alwaysUseUv": true,
+  "python-envs.terminal.autoActivationType": "command",
+  "uv.sendUvCommandToTerminal": true,
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
   "workbench.editor.editorActionsLocation": "hidden",
